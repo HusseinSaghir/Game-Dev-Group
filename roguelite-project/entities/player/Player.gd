@@ -46,7 +46,7 @@ func _physics_process(_delta):
 		
 	)
 
-	#Normalizing diagonal movement d
+	#Normalizing diagonal movement 
 	#We do this in order to make sure diagonal speed is not faster than normal left right speeds
 	if input_direction.length() > 0:
 		input_direction = input_direction.normalized()
