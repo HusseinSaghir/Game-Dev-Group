@@ -1,0 +1,20 @@
+Past college education and/or current field of study. How far along are you in the college curriculum?
+    I originally went to college studying biology/pre-med before pivoting myself into computer science. I studied for approximately 
+    two years, then spent time gaining work experience in the tech field after teaching myself technical support fundamentals. 
+    After spending roughly five years in the field, I began going back to school at night while working full-time so that I can move 
+    towards software development
+
+What are your hobbies or interests outside of class?
+     I love dabbling in as many different things as possible in order to find out what I truly enjoy and am passionate about in life. 
+     Historically, the ones that have stuck around are gaming, working out, art and music, and reading!
+
+I mainly have experience with Java, Kotlin, and SQL. I have tinkered around in Unity, and a host of other programming languages. I have 
+my past art experience and can create pixel art assets in Aseprite
+
+PC Specs:
+GIGABYTE B650 AORUS Elite AX Motherboard
+4070Ti Super GPU
+Ryzen 9 7900x 12-Core, 24-Thread 4.70 GHz clock speed CPU 
+32GB DDR5 7200MHz RAM
+Hyte Y60 Mid-Tower ATX Computer Gaming Case
+Seasonic PRIME TX-1000, 1000W 80+ Titanium PSU
