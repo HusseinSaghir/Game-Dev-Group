@@ -1,9 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://entities/player/player.tscn" id="1_apcar"]
+[ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://entities/enemy/enemy.tscn" id="2_rm08a"]
+[ext_resource type="AudioStream" uid="uid://c0begnlpdod1v" path="res://assets/sm64-mario-pain.ogg" id="3_wst8k"]
 
-[node name="GameWorld" type="Node2D"]
+[node name="GameWorld" type="Node2D" unique_id=2120277566]
 
-[node name="Player" parent="." instance=ExtResource("1_apcar")]
+[node name="Player" parent="." unique_id=599423565 instance=ExtResource("1_apcar")]
+collision_layer = 1
+collision_mask = 2
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1155634489]
+
+[node name="Enemy" parent="." unique_id=1671794706 node_paths=PackedStringArray("player") instance=ExtResource("2_rm08a")]
+position = Vector2(513, -1)
+collision_mask = 4
+player = NodePath("../Player")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=776705920]
+stream = ExtResource("3_wst8k")

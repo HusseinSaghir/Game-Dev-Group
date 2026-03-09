@@ -33,10 +33,10 @@ func _physics_process(_delta):
 		 # DEBUG - Check if input is working
 		 # Godot has built in preset commands but I did these myself
 		 # To do so go to Project -> Project Settings -> Input mapping
-	print("W: ", Input.is_action_pressed("move_up"))
-	print("A: ", Input.is_action_pressed("move_left"))
-	print("S: ", Input.is_action_pressed("move_down"))
-	print("D: ", Input.is_action_pressed("move_right"))
+	#print("W: ", Input.is_action_pressed("move_up"))
+	#print("A: ", Input.is_action_pressed("move_left"))
+	#print("S: ", Input.is_action_pressed("move_down"))
+	#print("D: ", Input.is_action_pressed("move_right"))
 	
 	
 	#Get input directions for WASD and Arrow keys
@@ -61,6 +61,7 @@ func _physics_process(_delta):
 	#Move the character
 	#This is really cool because we don't have to set specific vector params
 	move_and_slide()
+
 
 
 func update_animation(direction: Vector2):
