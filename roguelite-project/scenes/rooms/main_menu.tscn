@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://b75oppuidgsyh"]
+[gd_scene load_steps=8 format=3 uid="uid://b75oppuidgsyh"]
 
 [ext_resource type="Script" uid="uid://mqaix6s2iqkt" path="res://scripts/core/main_menu.gd" id="1_i04j1"]
+[ext_resource type="VideoStream" uid="uid://c7pd6a5c78qdm" path="res://assets/art/screens/Thsgoeshard.ogv" id="2_7vjsa"]
 [ext_resource type="Script" uid="uid://vd264qdqn71i" path="res://scripts/core/settings_menu.gd" id="2_xgk8r"]
+[ext_resource type="FontFile" uid="uid://dc1nusaugeumi" path="res://assets/fonts/CompassGold.ttf" id="3_ws7n6"]
+
+[sub_resource type="Animation" id="Animation_ws7n6"]
+resource_name = "fade_from_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dn3hh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdumk"]
+_data = {
+&"RESET": SubResource("Animation_dn3hh"),
+&"fade_from_black": SubResource("Animation_ws7n6")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,6 +51,24 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i04j1")
+
+[node name="Background" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_7vjsa")
+autoplay = true
+expand = true
+loop = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -30,20 +86,35 @@ grow_vertical = 2
 
 [node name="Game Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_ws7n6")
 theme_override_font_sizes/font_size = 48
-text = "The Best Damn Game Ever"
+text = "LABYRITH OF THE DAMNED!"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 20
 text = "Start Game"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 20
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 20
 text = "Quit Game"
 
 [node name="SettingsPopup" type="Panel" parent="."]
@@ -103,3 +174,19 @@ size_flags_vertical = 3
 [node name="CloseButton" type="Button" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
 text = "Close"
+
+[node name="Transition" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
+libraries = {
+&"": SubResource("AnimationLibrary_xdumk")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
