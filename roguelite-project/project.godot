@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 GameManager="*res://autoload/GameManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [input]
 
 move_left={
