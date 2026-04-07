@@ -108,7 +108,7 @@ func _paint_room(origin: Vector2i, width: int, height: int, has_troom: bool) -> 
 			var is_left := x == 0
 			var is_right := x == width - 1
 			var is_top := y == 0
-			var is_bottom := y == height -1
+			var is_bottom := y == height - 1
 			
 			if is_top and is_left:
 				ground_layer.set_cell(coord, FLOOR_SOURCE_ID, TILE_TOP_LEFT)
@@ -169,6 +169,9 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 	var x_right = troom_entrance_right.x
 	var entrance_y: int
 	var troom_origin: Vector2i
+	var troom_left = true
+	if randi() % 2:
+		troom_left = false
 	if troom_top:
 		ground_layer.set_cell(troom_entrance_right, FLOOR_SOURCE_ID, TILE_BOT_LEFT_OUT)
 		ground_layer.set_cell(troom_entrance_left, FLOOR_SOURCE_ID, TILE_BOT_RIGHT_OUT)
@@ -176,6 +179,16 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 			entrance_y = troom_entrance_left.y - 1
 			ground_layer.set_cell(Vector2i(x_left, entrance_y - y), FLOOR_SOURCE_ID, TILE_LEFT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y - y), FLOOR_SOURCE_ID, TILE_RIGHT)
+		if troom_left:
+			troom_origin = Vector2i(x_right - 4, entrance_y - troom_hall_length - 4)
+			_paint_room(troom_origin, 5, 5, false)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_TOP_RIGHT_OUT)
+			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_RIGHT)
+		else:
+			troom_origin = Vector2i(x_left, entrance_y - troom_hall_length - 4)
+			_paint_room(troom_origin, 5, 5, false)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_LEFT)
+			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_TOP_LEFT_OUT)
 	else:
 		ground_layer.set_cell(troom_entrance_left, FLOOR_SOURCE_ID, TILE_TOP_RIGHT_OUT)
 		ground_layer.set_cell(troom_entrance_right, FLOOR_SOURCE_ID, TILE_TOP_LEFT_OUT)
@@ -183,79 +196,16 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 			entrance_y = troom_entrance_left.y + 1
 			ground_layer.set_cell(Vector2i(x_left, entrance_y + y), FLOOR_SOURCE_ID, TILE_LEFT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y + y), FLOOR_SOURCE_ID, TILE_RIGHT)
-	generate_troom(troom_entrance_left, troom_entrance_right, troom_hall_length, troom_top)
-			
-func generate_troom(troom_entrance_left: Vector2i, troom_entrance_right: Vector2i, troom_hall_length: int, troom_top: bool) -> void:
-	var troom_origin: Vector2i
-	var troom_left = true
-	if randi() % 2:
-		troom_left = false
-	if troom_top:
 		if troom_left:
-			troom_origin = Vector2i(troom_entrance_right.x, troom_entrance_right.y - troom_hall_length - 1)
-			for x in range(5):
-				for y in range(5):
-					ground_layer.set_cell(Vector2i(troom_origin.x - x, troom_origin.y - y), FLOOR_SOURCE_ID, TILE_FLOOR)
-			ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOT_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 1, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP_RIGHT_OUT)
-			ground_layer.set_cell(troom_origin, FLOOR_SOURCE_ID, TILE_RIGHT)
-			for n in range(1, 4):
-				ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y - n), FLOOR_SOURCE_ID, TILE_RIGHT)
-				ground_layer.set_cell(Vector2i(troom_origin.x - n, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP)
-				ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y - n), FLOOR_SOURCE_ID, TILE_LEFT)
-			for n in range(1, 3):
-				ground_layer.set_cell(Vector2i(troom_origin.x - 1 - n, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOTTOM)
+			troom_origin = Vector2i(x_right - 4, entrance_y + troom_hall_length)
+			_paint_room(troom_origin, 5, 5, false)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_BOT_RIGHT_OUT)
+			ground_layer.set_cell(Vector2i(x_right, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_RIGHT)
 		else:
-			troom_origin = Vector2i(troom_entrance_left.x, troom_entrance_left.y - troom_hall_length - 1)
-			for x in range(5):
-				for y in range(5):
-					ground_layer.set_cell(Vector2i(troom_origin.x + x, troom_origin.y - y), FLOOR_SOURCE_ID, TILE_FLOOR)
-			ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOT_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 1, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP_LEFT_OUT)
-			ground_layer.set_cell(troom_origin, FLOOR_SOURCE_ID, TILE_LEFT)
-			for n in range(1, 4):
-				ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y - n), FLOOR_SOURCE_ID, TILE_LEFT)
-				ground_layer.set_cell(Vector2i(troom_origin.x + n, troom_origin.y - 4), FLOOR_SOURCE_ID, TILE_TOP)
-				ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y - n), FLOOR_SOURCE_ID, TILE_RIGHT)
-			for n in range(1, 3):
-				ground_layer.set_cell(Vector2i(troom_origin.x + 1 + n, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOTTOM)
-	else:
-		if troom_left:
-			troom_origin = Vector2i(troom_entrance_right.x, troom_entrance_right.y + troom_hall_length + 1)
-			for x in range(5):
-				for y in range(5):
-					ground_layer.set_cell(Vector2i(troom_origin.x - x, troom_origin.y + y), FLOOR_SOURCE_ID, TILE_FLOOR)
-			ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOT_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOT_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x - 1, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOT_RIGHT_OUT)
-			ground_layer.set_cell(troom_origin, FLOOR_SOURCE_ID, TILE_RIGHT)
-			for n in range(1, 4):
-				ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y + n), FLOOR_SOURCE_ID, TILE_RIGHT)
-				ground_layer.set_cell(Vector2i(troom_origin.x - n, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOTTOM)
-				ground_layer.set_cell(Vector2i(troom_origin.x - 4, troom_origin.y + n), FLOOR_SOURCE_ID, TILE_LEFT)
-			for n in range(1, 3):
-				ground_layer.set_cell(Vector2i(troom_origin.x - 1 - n, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP)
-		else:
-			troom_origin = Vector2i(troom_entrance_left.x, troom_entrance_left.y + troom_hall_length + 1)
-			for x in range(5):
-				for y in range(5):
-					ground_layer.set_cell(Vector2i(troom_origin.x + x, troom_origin.y + y), FLOOR_SOURCE_ID, TILE_FLOOR)
-			ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOT_LEFT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOT_RIGHT)
-			ground_layer.set_cell(Vector2i(troom_origin.x + 1, troom_origin.y), FLOOR_SOURCE_ID, TILE_BOT_LEFT_OUT)
-			ground_layer.set_cell(troom_origin, FLOOR_SOURCE_ID, TILE_LEFT)
-			for n in range(1, 4):
-				ground_layer.set_cell(Vector2i(troom_origin.x, troom_origin.y + n), FLOOR_SOURCE_ID, TILE_LEFT)
-				ground_layer.set_cell(Vector2i(troom_origin.x + n, troom_origin.y + 4), FLOOR_SOURCE_ID, TILE_BOTTOM)
-				ground_layer.set_cell(Vector2i(troom_origin.x + 4, troom_origin.y + n), FLOOR_SOURCE_ID, TILE_RIGHT)
-			for n in range(1, 3):
-				ground_layer.set_cell(Vector2i(troom_origin.x + 1 + n, troom_origin.y), FLOOR_SOURCE_ID, TILE_TOP)
+			troom_origin = Vector2i(x_left, entrance_y + troom_hall_length)
+			_paint_room(troom_origin, 5, 5, false)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_LEFT)
+			ground_layer.set_cell(Vector2i(x_right, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_BOT_LEFT_OUT)
 		
 func _center_player_spawn(origin: Vector2i, width: int, height: int) -> void:
 	#Move the spawn point to the center of the room.
