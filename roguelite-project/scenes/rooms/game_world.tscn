@@ -1,9 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene load_steps=5 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
+[ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/melee_weapon_item.tscn" id="2_6rqyq"]
+[ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="3_j8x4i"]
+[ext_resource type="PackedScene" uid="uid://cotgjl8evk80q" path="res://scenes/items/weapon_items/weapon_shortbow_item.tscn" id="4_d04yv"]
 
 [node name="GameWorld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0aysy")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="MeleeWeaponItem" parent="." instance=ExtResource("2_6rqyq")]
+position = Vector2(624, 304)
+
+[node name="Cricketshead" parent="." instance=ExtResource("3_j8x4i")]
+position = Vector2(424, 194)
+
+[node name="Cricketshead2" parent="." instance=ExtResource("3_j8x4i")]
+position = Vector2(362, 295)
+
+[node name="Cricketshead3" parent="." instance=ExtResource("3_j8x4i")]
+position = Vector2(285, 173)
+
+[node name="Cricketshead4" parent="." instance=ExtResource("3_j8x4i")]
+position = Vector2(236, 302)
+
+[node name="WeaponShortbowItem" parent="." instance=ExtResource("4_d04yv")]
+position = Vector2(534, 250)
