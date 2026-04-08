@@ -16,12 +16,16 @@ extends CharacterBody2D
 
 #Movement variables
 @export var speed: float = 100.0
-
+#The real total damage variable for both weapon and items
+var real_damage: int = 0
+#The total damage from any item that was picked up
+var applied_damage: int = 0
 # Animation node reference
 @onready var animated_sprite = $AnimatedSprite2D
 
 #Stores last direction for our idle animations
 var last_direction: Vector2 = Vector2.DOWN
+
 
 
 func _ready():
@@ -33,11 +37,11 @@ func _physics_process(_delta):
 		 # DEBUG - Check if input is working
 		 # Godot has built in preset commands but I did these myself
 		 # To do so go to Project -> Project Settings -> Input mapping
-	print("W: ", Input.is_action_pressed("move_up"))
-	print("A: ", Input.is_action_pressed("move_left"))
-	print("S: ", Input.is_action_pressed("move_down"))
-	print("D: ", Input.is_action_pressed("move_right"))
-	
+	#print("W: ", Input.is_action_pressed("move_up"))
+	#print("A: ", Input.is_action_pressed("move_left"))
+	#print("S: ", Input.is_action_pressed("move_down"))
+	#print("D: ", Input.is_action_pressed("move_right"))
+	#print(real_damage)
 	
 	#Get input directions for WASD and Arrow keys
 	var input_direction = Vector2(
@@ -102,3 +106,20 @@ func play_idle_animation():
 			animated_sprite.play("idle_down")
 		else:
 			animated_sprite.play("idle_up")
+
+#This function is called whenever a item is picked up that changes a damage value
+func change_damage(amount: int):
+	applied_damage += amount
+	real_damage += applied_damage
+
+#This function is called whenever a tiem is picked up that changes a speed value
+func change_speed(amount: int):
+	speed += amount
+	
+#This function is called whenever you change a weapon
+#It will set the real_damage to 0  then get the damage value of the weapon that was picked up
+#It will then add that and the applied_damage to real_damage
+func change_weapon_damage(weapond: int):
+	real_damage = 0
+	real_damage = weapond
+	real_damage += applied_damage

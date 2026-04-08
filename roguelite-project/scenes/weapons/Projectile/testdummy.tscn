@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://butyqs8yu7k1n"]
+
+[ext_resource type="Texture2D" uid="uid://tn41gsv3vg18" path="res://assets/art/weapons/projectile/Sassy.png" id="1_yntjh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh0s1"]
+size = Vector2(322, 344)
+
+[node name="Testdummy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_yntjh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_lh0s1")
