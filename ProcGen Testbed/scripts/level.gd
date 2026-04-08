@@ -5,19 +5,38 @@ const ROCK_SCENE = preload("res://scenes/rock.tscn")
 const STONE_DATA = preload("res://Data/Rocks/stone.tres")
 const IRON_DATA = preload("res://Data/Rocks/iron.tres")
 const GOLD_DATA = preload("res://Data/Rocks/gold.tres")
+const MAX_FLOORS := 3
 
 @onready var rock_container: Node2D = $RockContainer
 @onready var current_map: Node2D = $Map
 @onready var player: CharacterBody2D = $Player
 
+var current_floor := 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	generateRocks()
+	for child in rock_container.get_children():
+		child.queue_free()
+	var prop_layer: TileMapLayer = current_map.get_node("Props")
+	prop_layer.clear()
 	_place_player()
+	current_map.exit_reached.connect(_on_exit_reached)
 	
 func _place_player() -> void:
 	var spawn: Marker2D = current_map.get_node("PlayerSpawn")
 	player.position = spawn.global_position
+
+func _on_exit_reached() -> void:
+	if current_floor >= MAX_FLOORS:
+		#Trigger win/end screen here.
+		return
+	current_floor += 1
+	_next_floor()
+
+func _next_floor() -> void:
+	current_map.generate_sequence()
+	current_map.generate_dungeon()
+	_place_player()
 
 func generateRocks() -> void:
 	#Clear existing rocks.

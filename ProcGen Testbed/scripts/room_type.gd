@@ -3,8 +3,8 @@ extends RefCounted
 
 const MIN_WIDTH := 10
 const MAX_WIDTH := 20
-const MIN_HEIGHT := 8
-const MAX_HEIGHT := 16
+const MIN_HEIGHT := 10
+const MAX_HEIGHT := 20
 
 func get_dimensions() -> Vector2i:
 	assert(false, "RoomType.get_dimensions() must be overridden by subclass.")

@@ -1,9 +1,11 @@
 extends Node2D
 
+signal exit_reached
+
 #TUNABLE PARAMETERS
-const NUM_ROOMS := 5
 const ROOM_SPACING := 4 #Tiles between one room's right wall and the next room's left wall.
 const VOID_BORDER := 20 #Void tiles painted beyond room edges.
+const MAX_FLOORS := 3
 
 #TILE SOURCE IDS
 const FLOOR_SOURCE_ID := 0
@@ -34,23 +36,39 @@ const TILE_VOID := Vector2i(1,1)
 @onready var ground_layer: TileMapLayer = $Ground
 @onready var player_spawn: Marker2D = $PlayerSpawn
 
+var num_rooms := randi_range(5, 8)
+var current_floor := 1
+var _room_sequence: Array = []
 var _rooms: Array = [] #Stores each room by origin, width, and height.
 var _room_types: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_room_types = [StoneRoom.new(), IronRoom.new(), GoldRoom.new()]
+	_room_types = [StoneRoom.new(), IronRoom.new()]
+	generate_sequence()
 	generate_dungeon()
+	
+func generate_sequence() -> void:
+	_room_sequence.clear()
+	var room_type: RoomType
+	for i in range(num_rooms - 1):
+		room_type = _room_types[randi_range(0, _room_types.size() - 1)]
+		_room_sequence.append(room_type)
+	_room_sequence.append(GoldRoom.new())
 	
 func generate_dungeon() -> void:
 	#1). Clear the scene and rooms dictionary.
 	ground_layer.clear()
 	_rooms.clear()
 	
+	for node in get_children():
+		if node.is_in_group("exit_doors"):
+			node.queue_free()
+	
 	var cursor_x := 0 #Where the next room starts (in tile coordinates)
 	
-	for i in range(NUM_ROOMS):
-		var room_type: RoomType = _room_types[i % _room_types.size()]
+	for i in range(num_rooms):
+		var room_type: RoomType = _room_sequence[i]
 		var dimensions := room_type.get_dimensions()
 		var w := dimensions.x
 		var h := dimensions.y
@@ -60,6 +78,8 @@ func generate_dungeon() -> void:
 		if randi() % 2:
 			has_troom = false
 		
+		#Fully randomized: randi_range(origin.y + 1, total_height - 3)
+		var total_height := origin.y + h
 		var exit_tile := Vector2i(origin.x + w - 1, origin.y + h / 2)
 		var entrance_tile := Vector2i(origin.x, origin.y + h / 2)
 		
@@ -90,6 +110,7 @@ func generate_dungeon() -> void:
 		
 	var first : Dictionary = _rooms[0]
 	_center_player_spawn(first["origin"], first["width"], first["height"])
+	paint_exit_door(_rooms.back())
 	
 	
 func _paint_void(total_width: int, total_height: int) -> void:
@@ -212,6 +233,28 @@ func _center_player_spawn(origin: Vector2i, width: int, height: int) -> void:
 	var center_tile := Vector2i(origin.x + width / 2, origin.y + height / 2)
 	ground_layer.set_cell(center_tile, SPAWN_SOURCE_ID, TILE_SPAWN)
 	player_spawn.position = ground_layer.map_to_local(center_tile)
+
+func paint_exit_door(last_room: Dictionary) -> void:
+	if current_floor >= MAX_FLOORS:
+		return
+	
+	var exit: Vector2i = last_room["exit"]
+	ground_layer.set_cell(exit, SPAWN_SOURCE_ID, TILE_SPAWN)
+	
+	var area := Area2D.new()
+	var shape := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = Vector2(16, 16)
+	shape.shape = rect
+	area.add_child(shape)
+	area.position = ground_layer.map_to_local(exit)
+	add_child(area)
+	area.add_to_group("exit_doors")
+	area.body_entered.connect(_on_exit_entered)
+	
+func _on_exit_entered(body: Node2D) -> void:
+	if body is Player:
+		emit_signal("exit_reached")
 
 func get_rooms() -> Array:
 	return _rooms
