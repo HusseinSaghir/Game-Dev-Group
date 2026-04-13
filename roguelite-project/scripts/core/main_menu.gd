@@ -16,7 +16,7 @@ func _ready():
 		settings_popup.hide()
 	
 	# Play music
-	var music = load("res://assets/audio/music/Fortunes Delight Extended.mp3")
+	var music = load("res://assets/audio/music/Fortunes Delight Extended.mp3") #CHANGE ME LATER
 	AudioManager.play_music(music)
 	
 	# Fade in from black

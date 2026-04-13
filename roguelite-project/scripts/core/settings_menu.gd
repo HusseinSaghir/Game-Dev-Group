@@ -56,7 +56,7 @@ func _on_sfx_slider_changed(value: float):
 func _on_resolution_selected(index: int):
 	var res_name = resolution_dropdown.get_item_text(index)
 	var new_size = RESOLUTIONS[res_name]
-	DisplayServer.window_set_size(new_size)
+	DisplayManager.set_resolution(new_size)
 	
 	# Get current screen and center on THAT screen (not primary)
 	var current_screen = DisplayServer.window_get_current_screen()
