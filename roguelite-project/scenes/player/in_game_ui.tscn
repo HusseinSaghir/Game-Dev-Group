@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cn26pbnulxh4u"]
+
+[ext_resource type="Script" uid="uid://bg7ehn662bvin" path="res://scripts/in_game_ui.gd" id="1_26u5j"]
+[ext_resource type="Texture2D" uid="uid://cxplj6hgp4nq3" path="res://assets/UI/In-Game UI/All.png" id="2_f03d5"]
+[ext_resource type="Texture2D" uid="uid://b7i4ggmtca3x4" path="res://assets/UI/UI_Frames/health_frames_0.tres" id="2_yfrkb"]
+[ext_resource type="Texture2D" uid="uid://b5t1s6oqkjyku" path="res://assets/UI/UI_Frames/health_frames_1.tres" id="3_v2kcd"]
+[ext_resource type="Texture2D" uid="uid://dp8obdchw8s51" path="res://assets/UI/UI_Frames/health_frames_2.tres" id="4_a0ajj"]
+[ext_resource type="Texture2D" uid="uid://c38ig86mxjas5" path="res://assets/UI/UI_Frames/health_frames_3.tres" id="5_8s5r5"]
+[ext_resource type="Texture2D" uid="uid://45t8qpb6sy77" path="res://assets/UI/UI_Frames/health_frames_4.tres" id="6_n5n3y"]
+[ext_resource type="Texture2D" uid="uid://b1mpyggtn5qwt" path="res://assets/UI/UI_Frames/stamina_frames_0.tres" id="7_phm2c"]
+[ext_resource type="Texture2D" uid="uid://bnedtfen0au3f" path="res://assets/UI/UI_Frames/stamina_frames_1.tres" id="8_udqp4"]
+[ext_resource type="Texture2D" uid="uid://bxa5kam2wr4i6" path="res://assets/UI/UI_Frames/stamina_frames_2.tres" id="9_1yyiq"]
+[ext_resource type="Texture2D" uid="uid://bghvrnxf3esgw" path="res://assets/UI/UI_Frames/stamina_frames_3.tres" id="10_qdghv"]
+[ext_resource type="Texture2D" uid="uid://b6u4epgne4j0w" path="res://assets/UI/UI_Frames/stamina_frames_4.tres" id="11_nnshg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mito"]
+atlas = ExtResource("2_f03d5")
+region = Rect2(1107, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts4s2"]
+atlas = ExtResource("2_f03d5")
+region = Rect2(915, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqicu"]
+atlas = ExtResource("2_f03d5")
+region = Rect2(1107, 21, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihdxq"]
+atlas = ExtResource("2_f03d5")
+region = Rect2(915, 21, 42, 7)
+
+[node name="In-GameUI" type="Control" unique_id=1455226470]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26u5j")
+health_frames = Array[Texture2D]([ExtResource("2_yfrkb"), ExtResource("3_v2kcd"), ExtResource("4_a0ajj"), ExtResource("5_8s5r5"), ExtResource("6_n5n3y")])
+stamina_frames = Array[Texture2D]([ExtResource("7_phm2c"), ExtResource("8_udqp4"), ExtResource("9_1yyiq"), ExtResource("10_qdghv"), ExtResource("11_nnshg")])
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=179987977]
+custom_minimum_size = Vector2(320, 120)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1679709259]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HealthContainer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1599192196]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/HealthContainer" unique_id=633872526]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_5mito")
+texture_progress = SubResource("AtlasTexture_ts4s2")
+
+[node name="HealthFX" type="TextureRect" parent="MarginContainer/VBoxContainer/HealthContainer" unique_id=910468735]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 4
+
+[node name="StaminaContainer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=781504558]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="StaminaBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/StaminaContainer" unique_id=169812656]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_kqicu")
+texture_progress = SubResource("AtlasTexture_ihdxq")
+
+[node name="StaminaFX" type="TextureRect" parent="MarginContainer/VBoxContainer/StaminaContainer" unique_id=1882177896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
