@@ -201,4 +201,4 @@ shape = SubResource("RectangleShape2D_onrkg")
 position = Vector2(16, 17)
 scale = Vector2(2.75, 2.6875)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
-animation = &"idle_right"
+animation = &"idle_down"
