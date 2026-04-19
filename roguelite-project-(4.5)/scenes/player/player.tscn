@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://3kgkr0r0jaag" path="res://assets/art/characters/character_base_16x16.png" id="2_sglur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(50, 43)
+size = Vector2(12, 7.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_sglur")
@@ -194,11 +194,11 @@ position = Vector2(571, 299)
 script = ExtResource("1_abrql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 16)
+position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, 17)
-scale = Vector2(2.75, 2.6875)
+position = Vector2(0, -2)
+scale = Vector2(1.024, 1)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
 animation = &"idle_down"
