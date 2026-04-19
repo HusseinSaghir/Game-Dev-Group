@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene load_steps=8 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/melee_weapon_item.tscn" id="2_6rqyq"]
 [ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="3_j8x4i"]
 [ext_resource type="PackedScene" uid="uid://cotgjl8evk80q" path="res://scenes/items/weapon_items/weapon_shortbow_item.tscn" id="4_d04yv"]
 [ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
+[ext_resource type="Script" uid="uid://b77hovyeipih8" path="res://scripts/game_world/room_generator.gd" id="6_rqyq"]
+[ext_resource type="Script" uid="uid://cjpkhbubdlgu" path="res://scripts/game_world/level.gd" id="7_d04yv"]
+[ext_resource type="PackedScene" uid="uid://4x4qpc4k7elb" path="res://scenes/rooms/floor.tscn" id="8_j8x4i"]
 
 [node name="GameWorld" type="Node2D"]
+script = ExtResource("7_d04yv")
+
+[node name="Map" parent="." instance=ExtResource("8_j8x4i")]
+script = ExtResource("6_rqyq")
 
 [node name="Player" parent="." instance=ExtResource("1_0aysy")]
 
