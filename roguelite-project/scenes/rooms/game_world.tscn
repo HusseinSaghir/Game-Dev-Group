@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene load_steps=3 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
+[ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
 
 [node name="GameWorld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0aysy")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PickupDisplay" parent="CanvasLayer" instance=ExtResource("2_s1315")]

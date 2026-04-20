@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceItem" load_steps=3 format=3 uid="uid://ce51t6xnpdnff"]
+
+[ext_resource type="Script" uid="uid://c78wxrhofanms" path="res://scripts/items/Resources/resource_item.gd" id="1_g4dn5"]
+[ext_resource type="Texture2D" uid="uid://b0hqxqtvcxe2f" path="res://assets/art/items/Cricket%27s_Head_Icon.webp" id="2_8a5mp"]
+
+[resource]
+script = ExtResource("1_g4dn5")
+display_name = "Crickets Head"
+texture = ExtResource("2_8a5mp")
+group = "Passive"
+metadata/_custom_type_script = "uid://c78wxrhofanms"

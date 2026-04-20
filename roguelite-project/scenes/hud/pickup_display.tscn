@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1j43y6t82tr"]
+
+[ext_resource type="Script" uid="uid://b2xhnj24jmvxq" path="res://scripts/hud/pickup_display.gd" id="1_i2jac"]
+[ext_resource type="PackedScene" uid="uid://doyvrr7j0nhat" path="res://scenes/hud/pickup_count_display.tscn" id="2_bmyvu"]
+
+[node name="PickupDisplay" type="MarginContainer"]
+offset_right = 65.0
+offset_bottom = 260.0
+scale = Vector2(2, 2)
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_i2jac")
+pickup_display_template = ExtResource("2_bmyvu")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2

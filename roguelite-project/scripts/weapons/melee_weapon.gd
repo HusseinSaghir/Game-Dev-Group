@@ -13,7 +13,7 @@ const BULLET = preload("res://scenes/weapons/Projectile/cat_bullet.tscn")
 # animation
 # hit box
 # For when the action "attack" is pressed and will cause 
-func _use():
+func use():
 	anim.play("attack")
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.weapon_ref = self

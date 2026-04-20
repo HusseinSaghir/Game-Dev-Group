@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 #Below we have Godot spevific annotations which we will be seeing often
 #@export makes a variable editable within the godot inspector on the right -> 
 #Great tool for debugging and testing fast!
