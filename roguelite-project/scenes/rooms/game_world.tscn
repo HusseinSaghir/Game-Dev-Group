@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene load_steps=10 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/melee_weapon_item.tscn" id="2_6rqyq"]
+[ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
 [ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="3_j8x4i"]
 [ext_resource type="PackedScene" uid="uid://cotgjl8evk80q" path="res://scenes/items/weapon_items/weapon_shortbow_item.tscn" id="4_d04yv"]
 [ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
@@ -30,3 +31,7 @@ position = Vector2(424, 194)
 position = Vector2(534, 250)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_s1315")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PickupDisplay" parent="CanvasLayer" instance=ExtResource("2_s1315")]

@@ -33,6 +33,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 Player="the group only for the player"
+Pickup="Any Pickup Items"
 
 [input]
 

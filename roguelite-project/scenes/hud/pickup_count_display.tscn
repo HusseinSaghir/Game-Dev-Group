@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://doyvrr7j0nhat"]
+
+[ext_resource type="Script" uid="uid://dhq6cl6srg0w4" path="res://scripts/hud/pickup_count_display.gd" id="1_os2ho"]
+[ext_resource type="Texture2D" uid="uid://bxpn7ixsi5l71" path="res://assets/art/items/pickups/coin.webp" id="2_osq5i"]
+
+[node name="PickupCountDisplay" type="HBoxContainer"]
+script = ExtResource("1_os2ho")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_osq5i")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
