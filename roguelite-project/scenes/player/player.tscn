@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c8y6chk1fjlav" path="res://scripts/weapons/weapon_structure/player_weapons.gd" id="3_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(31, 43)
+size = Vector2(8, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_sglur")
@@ -195,12 +195,12 @@ position = Vector2(571, 299)
 script = ExtResource("1_abrql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16.5, 16)
+position = Vector2(16, 16.5)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(16, 17)
-scale = Vector2(2.75, 2.6875)
+scale = Vector2(0.75, 0.732)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
 animation = &"idle_right"
 frame_progress = 0.42388192
