@@ -41,11 +41,7 @@ func load_audio_settings():
 		sfx_volume = 0.8
 		print("No config file, using defaults") #DEBUG LINE
 	
-	# Don't allow volumes below 0.1 (prevent silent defaults)
-	if music_volume < 0.1:
-		music_volume = 0.7
-	if sfx_volume < 0.1:
-		sfx_volume = 0.8
+	
 	
 	# Apply loaded volumes
 	set_music_volume(music_volume)
