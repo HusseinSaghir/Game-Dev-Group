@@ -41,9 +41,9 @@ _data = {
 }
 
 [node name="Weapon_Sword" type="Node2D"]
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ruf80")
 hit_force = 150.0
-range = 30.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(30, 0)

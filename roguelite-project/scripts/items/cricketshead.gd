@@ -7,15 +7,15 @@ extends EquipItem
 #It will also print "picked up" for now as a test
 #Then it will delete the item from the current scene
 func _on_body_entered(body: Node2D) -> void:
-<<<<<<< HEAD
+
 
 	if not body.is_in_group("Player"):
 		return
 	
 	body.change_damage(-50)
-=======
+
 	body.change_damage(50)
->>>>>>> origin/NathanKauffman
+
 	body.change_speed(500)
 	print("picked up")
 	queue_free()
