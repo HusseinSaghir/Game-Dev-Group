@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbhnf0yt1tb7l"]
+[gd_scene load_steps=12 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/melee_weapon_item.tscn" id="2_6rqyq"]
@@ -34,6 +34,7 @@ position = Vector2(424, 194)
 position = Vector2(455, 194)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_s1315")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

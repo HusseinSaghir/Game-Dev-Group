@@ -1,5 +1,9 @@
 class_name WeaponShortbow
 extends EquipItem
+#This is the shortbow weapon
+#This will shoot a shotgun like spread projectiles that do less damage
+
+
 
 #Variables for the weapon
 #Knockback variable if we do use it

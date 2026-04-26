@@ -1,18 +1,18 @@
 extends Node2D
-#This projectile is for the shortbow
+
+#Speed of the Bullet
+const SPEED: int = 300
 
 
-const SPEED: int = 100
-
-var player = "res://scenes/player/player.tscn"
-
-var weapon_ref : WeaponShortbow
+#Made so it can store a reference from the weapon its tide to
+#Which in this case its the MeleeWeapon
+var weapon_ref : MeleeWeapon
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position += transform.x * SPEED * delta
 
-#Whenever the projectile has a collision this function will be called
+#Whenever the Cat Bullet collides with another hitbox
 func _on_body_entered(body: Node2D) -> void:
 	#This is for if the player runs into the bullet the bullet will not disapear
 	if body.is_in_group("Player"):
@@ -23,5 +23,6 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		queue_free()
 
+#When the Cat Bullet goes out of the camera view it removes the instance
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

@@ -11,18 +11,11 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if not body.is_in_group("Player"):
 		return
-	
-	body.change_damage(-50)
 
-	body.change_damage(50)
-
-	body.change_speed(500)
+	body.change_speed(20)
 	print("picked up")
 	queue_free()
 
-	
-	body.change_damage(50)
-	body.change_speed(500)
 	
 	#This will check to see if the body that interacted with the item has a Inventory Child
 	#If it does have a inventory it will call the add_resources() function and add the resource to the inventory

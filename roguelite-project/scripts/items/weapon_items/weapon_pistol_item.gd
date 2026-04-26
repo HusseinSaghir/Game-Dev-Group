@@ -1,5 +1,5 @@
 extends EquipItem
-#This is the Shortbow item so the player can equip the Shortbow weapon
+#This is the Pisol item so the player can equip the Pistol
 @export var type_weapon : PackedScene
 
 #When the player touches this weapon it will unequip the old weapon and equip the new one

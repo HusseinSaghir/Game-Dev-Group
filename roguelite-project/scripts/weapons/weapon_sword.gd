@@ -1,5 +1,6 @@
 class_name MeleeWeapon
 extends EquipItem
+#This is the Sword Weapon which is a basic higher dealing damage weapon.
 
 #Variables for the sub nodes for the weapon scene
 #For knockback if we want it
@@ -7,7 +8,7 @@ extends EquipItem
 @onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var muzzle : Marker2D = $Marker2D
 
-const BULLET = preload("res://scenes/weapons/Projectile/cat_bullet.tscn")
+const BULLET = preload("res://scenes/weapons/Projectile/sword_projectile.tscn")
 
 
 # animation
@@ -15,6 +16,7 @@ const BULLET = preload("res://scenes/weapons/Projectile/cat_bullet.tscn")
 # For when the action "attack" is pressed and will cause 
 func _use():
 	anim.play("attack")
+	
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.weapon_ref = self
 	get_tree().root.add_child(bullet_instance)

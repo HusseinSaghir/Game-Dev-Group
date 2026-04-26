@@ -199,8 +199,8 @@ size = Vector2(8, 11)
 script = ExtResource("1_abrql")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, 17)
-scale = Vector2(0.75, 0.732)
+position = Vector2(16, 16.572)
+scale = Vector2(0.75, 0.6785)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
 animation = &"idle_right"
 frame_progress = 0.42388192
@@ -209,7 +209,7 @@ frame_progress = 0.42388192
 one_shot = true
 
 [node name="PlayerWeapons" type="Node2D" parent="."]
-position = Vector2(21, 24)
+position = Vector2(16, 20)
 script = ExtResource("3_lvxji")
 
 [node name="Inventory" type="Node" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://betdhw34kcii1"]
 
 [ext_resource type="Texture2D" uid="uid://lywosvcvje6c" path="res://assets/art/weapons/ZenithTerraria.webp" id="1_5yyqi"]
-[ext_resource type="Script" uid="uid://dg5x1o755yhqx" path="res://scripts/items/weapon_items/melee_weapon_item.gd" id="1_83esy"]
+[ext_resource type="Script" uid="uid://dg5x1o755yhqx" path="res://scripts/items/weapon_items/weapon_sword_item.gd" id="1_83esy"]
 [ext_resource type="PackedScene" uid="uid://pxsgiedms586" path="res://scenes/weapons/weapon_sword.tscn" id="2_vc35m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5yyqi"]

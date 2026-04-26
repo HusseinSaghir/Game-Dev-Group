@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bxpn7ixsi5l71" path="res://assets/art/items/pickups/coin.webp" id="2_mxd6y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0d0bn"]
-radius = 22.022715
+radius = 4.0
 
 [node name="Pickup_Coin" type="Area2D" groups=["Pickup"]]
 script = ExtResource("1_diqcf")
@@ -13,7 +13,7 @@ resource_type = ExtResource("2_0d0bn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.9073486e-06, 0)
-scale = Vector2(2.3888888, 2.0192308)
+scale = Vector2(0.5, 0.423)
 texture = ExtResource("2_mxd6y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
