@@ -3,6 +3,7 @@ extends Control
 
 # Reference to settings popup (will be shown/hidden)
 @onready var settings_popup = $SettingsPopup
+@onready var animation_player = $Transition/AnimationPlayer
 
 func _ready():
 	# Connect button signals to functions
@@ -13,9 +14,13 @@ func _ready():
 	# Make sure settings popup is hidden at start
 	if settings_popup:
 		settings_popup.hide()
-
-	var music = load("res://assets/audio/music/Fortunes Delight Extended.mp3")
+	
+	# Play music
+	var music = load("res://assets/audio/music/Fortunes Delight Extended.mp3") #CHANGE ME LATER
 	AudioManager.play_music(music)
+	
+	# Fade in from black
+	animation_player.play("fade_from_black")
 
 # Start Game button clicked
 func _on_start_pressed():

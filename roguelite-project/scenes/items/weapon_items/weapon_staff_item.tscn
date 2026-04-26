@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://rka1yl11vy67"]
+
+[ext_resource type="Script" uid="uid://dkf7m76t2hlq8" path="res://scripts/items/weapon_items/weapon_staff_item.gd" id="1_fph0t"]
+[ext_resource type="Texture2D" uid="uid://rf5cwyrx2ot0" path="res://assets/art/weapons/wpn_staff.png" id="1_rtpf4"]
+[ext_resource type="PackedScene" uid="uid://byp4pog7kxnyj" path="res://scenes/weapons/weapon_staff.tscn" id="2_72bag"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_72bag"]
+radius = 4.0
+height = 18.0
+
+[node name="WeaponStaffItem" type="Area2D"]
+script = ExtResource("1_fph0t")
+type_weapon = ExtResource("2_72bag")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.9073486e-06, 1.9073486e-06)
+scale = Vector2(0.12719297, 0.061011903)
+texture = ExtResource("1_rtpf4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_72bag")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -14,6 +14,8 @@ func _ready() -> void:
 #When the Player runs into the pickup it will see if the Player has a inventory
 #If there is a inventory it will call the function add_resource() and add the resource to the inventory
 func _on_body_entered(body : Node2D):
+	if not body.is_in_group("Player"):
+		return
 	var inventory = body.find_child("Inventory")
 	
 	if(inventory):
