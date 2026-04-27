@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cp81dgryhn71v"]
+[gd_scene load_steps=11 format=3 uid="uid://cp81dgryhn71v"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="8_3ntna"]
 [ext_resource type="PackedScene" uid="uid://13t38se3orbd" path="res://scenes/items/pickups/pickup_key.tscn" id="9_t4rt3"]
 [ext_resource type="PackedScene" uid="uid://butyqs8yu7k1n" path="res://scenes/items/slotMachine/slots.tscn" id="10_t4rt3"]
-[ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="11_qx2u2"]
 
 [node name="GameWorld" type="Node2D"]
 
@@ -25,19 +24,19 @@ zoom = Vector2(3, 3)
 [node name="PickupDisplay" parent="CanvasLayer" instance=ExtResource("2_s1315")]
 
 [node name="WeaponShortbowItem" parent="." instance=ExtResource("3_3mjdk")]
-position = Vector2(610, 330)
+position = Vector2(639, 263)
 
 [node name="MeleeWeaponItem" parent="." instance=ExtResource("4_1yvp6")]
-position = Vector2(626, 328)
+position = Vector2(656, 282)
 
 [node name="WeaponStaffItem" parent="." instance=ExtResource("5_33rt3")]
-position = Vector2(641, 330)
+position = Vector2(668, 261)
 
 [node name="WeaponPistolItem" parent="." instance=ExtResource("6_3ntna")]
-position = Vector2(659, 332)
+position = Vector2(674, 308)
 
 [node name="Pickup_Coin" parent="." instance=ExtResource("7_1yvp6")]
-position = Vector2(514, 270)
+position = Vector2(586, 319)
 
 [node name="Cricketshead" parent="." instance=ExtResource("8_3ntna")]
 position = Vector2(516, 301)
@@ -45,9 +44,5 @@ position = Vector2(516, 301)
 [node name="pickup_key" parent="." instance=ExtResource("9_t4rt3")]
 position = Vector2(512, 328)
 
-[node name="Testdummy" parent="." instance=ExtResource("10_t4rt3")]
-position = Vector2(436, 250)
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_qx2u2")]
-position = Vector2(402, 376)
-player = NodePath("../Player")
+[node name="Slots" parent="." instance=ExtResource("10_t4rt3")]
+position = Vector2(593, 286)
