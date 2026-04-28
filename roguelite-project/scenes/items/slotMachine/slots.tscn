@@ -370,3 +370,6 @@ shape = SubResource("RectangleShape2D_86ys0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(-7.3046875, 8.7109375)
 shape = SubResource("RectangleShape2D_lh0s1")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, 40)
