@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqkwblki6kddb"]
+
+[ext_resource type="Script" uid="uid://ciwwh8g2g3jrl" path="res://scripts/weapons/projectile/pistol_projectile.gd" id="1_e1pos"]
+[ext_resource type="Texture2D" uid="uid://bjpa2yanppmd3" path="res://assets/art/weapons/projectile/pistol_projectile_art.png" id="1_fxq78"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pl6s"]
+size = Vector2(8, 1.5)
+
+[node name="PistolProjectile" type="Area2D"]
+script = ExtResource("1_e1pos")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.3841858e-07, -4.4703484e-08)
+scale = Vector2(0.0060267854, 0.0036085541)
+texture = ExtResource("1_fxq78")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(6, 9)
+rect = Rect2(-10, -10, 8, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4pl6s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

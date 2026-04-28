@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgfpkuc3ka5ub"]
+
+[ext_resource type="Script" uid="uid://15larwc32noi" path="res://scripts/weapons/projectile/shortbow_projectile.gd" id="1_f4dfd"]
+[ext_resource type="Texture2D" uid="uid://7ufum4ubum10" path="res://assets/art/weapons/projectile/shuuush.jpg" id="1_pnet5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4dfd"]
+size = Vector2(4, 8)
+
+[node name="ShortbowProjectile" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_f4dfd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.1920929e-07)
+scale = Vector2(0.0029166671, 0.00581408)
+texture = ExtResource("1_pnet5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-13, 7)
+rect = Rect2(10, -12, 6, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f4dfd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

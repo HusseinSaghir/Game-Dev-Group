@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://lamk0c623fdn"]
+
+[ext_resource type="Texture2D" uid="uid://p3fsr6j8nsye" path="res://assets/art/weapons/Basic Sword.png" id="1_jrmd0"]
+[ext_resource type="Script" uid="uid://521dweuvap5v" path="res://scripts/weapons/weapon_shortbow.gd" id="1_s1f67"]
+
+[node name="WeaponShortbow" type="Node2D"]
+script = ExtResource("1_s1f67")
+arc = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.5, 0)
+scale = Vector2(0.25595236, 0.25000003)
+texture = ExtResource("1_jrmd0")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(5, 0)

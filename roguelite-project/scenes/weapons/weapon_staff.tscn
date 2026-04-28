@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://byp4pog7kxnyj"]
+
+[ext_resource type="Script" uid="uid://dxpkkh2rmv2jr" path="res://scripts/weapons/weapon_staff.gd" id="1_6rm4e"]
+[ext_resource type="Texture2D" uid="uid://rf5cwyrx2ot0" path="res://assets/art/weapons/wpn_staff.png" id="1_tfwfa"]
+
+[node name="WeaponStaff" type="Node2D"]
+script = ExtResource("1_6rm4e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 2)
+rotation = 1.5707964
+scale = Vector2(0.100877196, 0.07738095)
+texture = ExtResource("1_tfwfa")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(17, 1)

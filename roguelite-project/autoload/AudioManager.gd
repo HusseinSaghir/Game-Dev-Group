@@ -15,10 +15,12 @@ func _ready():
 	# Create audio players
 	music_player = AudioStreamPlayer.new()
 	music_player.bus = MUSIC_BUS
+	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(music_player)
 	
 	sfx_player = AudioStreamPlayer.new()
 	sfx_player.bus = SFX_BUS
+	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS #Potentially remove this line because idk if we'd want that to persist during pauses
 	add_child(sfx_player)
 	
 	# Load saved volume settings
@@ -32,16 +34,14 @@ func load_audio_settings():
 	if err == OK:
 		music_volume = config.get_value("audio", "music_volume", 0.7)
 		sfx_volume = config.get_value("audio", "sfx_volume", 0.8)
+		print("Loaded - Music: ", music_volume, " SFX: ", sfx_volume) #DEBUG LINE TO DELETE LATER
 	else:
 		# No config file exists - use defaults
 		music_volume = 0.7
 		sfx_volume = 0.8
+		print("No config file, using defaults") #DEBUG LINE
 	
-	# Don't allow volumes below 0.1 (prevent silent defaults)
-	if music_volume < 0.1:
-		music_volume = 0.7
-	if sfx_volume < 0.1:
-		sfx_volume = 0.8
+	
 	
 	# Apply loaded volumes
 	set_music_volume(music_volume)
@@ -83,3 +83,4 @@ func save_audio_settings():
 	config.set_value("audio", "music_volume", music_volume)
 	config.set_value("audio", "sfx_volume", sfx_volume)
 	config.save("user://audio_settings.cfg")
+	print("Saved - Music: ", music_volume, " SFX: ", sfx_volume) #DEBUG LINE

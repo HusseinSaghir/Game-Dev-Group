@@ -11,7 +11,7 @@ var flash_speed: float = 2.0  # Speed of the flash (higher = faster)
 var time_passed: float = 0.0
 
 # Load the sound effect
-var key_press_sfx = preload("res://assets/audio/sfx/Dark Souls 2 Start Menu Sound Effect.wav")
+var key_press_sfx = preload("res://assets/audio/sfx/Dark Souls 2 Start Menu Sound Effect.wav") #CHANGE ME LATER
 
 func _ready():
 	# Make sure we can receive input

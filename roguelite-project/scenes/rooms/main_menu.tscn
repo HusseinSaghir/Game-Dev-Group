@@ -5,21 +5,6 @@
 [ext_resource type="Script" uid="uid://vd264qdqn71i" path="res://scripts/core/settings_menu.gd" id="2_xgk8r"]
 [ext_resource type="FontFile" uid="uid://dc1nusaugeumi" path="res://assets/fonts/CompassGold.ttf" id="3_ws7n6"]
 
-[sub_resource type="Animation" id="Animation_ws7n6"]
-resource_name = "fade_from_black"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_dn3hh"]
 length = 0.001
 tracks/0/type = "value"
@@ -35,6 +20,21 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ws7n6"]
+resource_name = "fade_from_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xdumk"]
 _data = {
 &"RESET": SubResource("Animation_dn3hh"),
@@ -43,13 +43,15 @@ _data = {
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_top = 0.011000001
+anchor_right = 2.3470001
+anchor_bottom = 2.3330002
+offset_top = -4.98
+offset_right = -1549.6705
+offset_bottom = -863.7842
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_i04j1")
 
 [node name="Background" type="VideoStreamPlayer" parent="."]
@@ -59,10 +61,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_left = -575.0368
+offset_top = -325.074
+offset_right = 573.9632
+offset_bottom = 316.926
 grow_horizontal = 2
 grow_vertical = 2
 stream = ExtResource("2_7vjsa")
@@ -77,10 +79,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -268.5
+offset_top = -69.0
+offset_right = 268.5
+offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -95,6 +97,7 @@ horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("3_ws7n6")
@@ -119,10 +122,10 @@ text = "Quit Game"
 
 [node name="SettingsPopup" type="Panel" parent="."]
 layout_mode = 1
-offset_left = -550.0
-offset_top = -300.0
-offset_right = -330.0
-offset_bottom = -100.0
+offset_left = 33.0
+offset_top = 16.85199
+offset_right = 253.0
+offset_bottom = 216.85199
 script = ExtResource("2_xgk8r")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SettingsPopup"]
@@ -132,6 +135,10 @@ offset_bottom = 184.0
 
 [node name="TitleLabel" type="Label" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 24
 text = "Settings"
 horizontal_alignment = 1
 
@@ -140,17 +147,28 @@ layout_mode = 2
 
 [node name="SFXLabel" type="Label" parent="SettingsPopup/VBoxContainer/SFXRow"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 19
 text = "SFX Volume"
 
 [node name="SFXSlider" type="HSlider" parent="SettingsPopup/VBoxContainer/SFXRow"]
 custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.25
 
 [node name="MusicRow" type="HBoxContainer" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
 
 [node name="MusicLabel" type="Label" parent="SettingsPopup/VBoxContainer/MusicRow"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 19
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPopup/VBoxContainer/MusicRow"]
@@ -162,10 +180,18 @@ value = 0.25
 
 [node name="ResolutionLabel" type="Label" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 19
 text = "Resolution"
 
 [node name="ResolutionDropdown" type="OptionButton" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.8745098, 0.8745098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 20
 
 [node name="Spacer" type="Control" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
@@ -173,6 +199,10 @@ size_flags_vertical = 3
 
 [node name="CloseButton" type="Button" parent="SettingsPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ws7n6")
+theme_override_font_sizes/font_size = 19
 text = "Close"
 
 [node name="Transition" type="CanvasLayer" parent="."]
@@ -187,6 +217,9 @@ modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 529.0
+offset_bottom = 310.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
