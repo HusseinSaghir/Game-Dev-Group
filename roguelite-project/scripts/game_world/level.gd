@@ -13,7 +13,7 @@ const MAX_FLOORS := 3
 #---------------------------------------------------------------------------------------------------
 #NODE REFERENCES
 #---------------------------------------------------------------------------------------------------
-@onready var rock_container: Node2D = $RockContainer
+#@onready var rock_container: Node2D = $RockContainer
 @onready var current_map: Node2D = $Map
 @onready var player: CharacterBody2D = $Player
 
@@ -60,8 +60,8 @@ func _next_floor() -> void:
 #GENERATE ROCKS (Never called, hold for other props.)
 #---------------------------------------------------------------------------------------------------
 func generateRocks() -> void:
-	for child in rock_container.get_children():                    #Clear existing rocks in container.
-		child.queue_free()
+	#for child in rock_container.get_children():                    #Clear existing rocks in container.
+		#child.queue_free()
 		
 	var ground_layer: TileMapLayer = current_map.get_node("Ground")#Get tile layers.
 	var prop_layer: TileMapLayer = current_map.get_node("Props")

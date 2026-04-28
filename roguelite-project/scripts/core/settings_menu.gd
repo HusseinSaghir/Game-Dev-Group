@@ -9,6 +9,7 @@ extends Panel
 
 # Common resolution options
 const RESOLUTIONS = {
+	"2560x1440": Vector2i(2560, 1440),
 	"1920x1080": Vector2i(1920, 1080),
 	"1600x900": Vector2i(1600, 900),
 	"1366x768": Vector2i(1366, 768),
@@ -55,10 +56,13 @@ func _on_sfx_slider_changed(value: float):
 func _on_resolution_selected(index: int):
 	var res_name = resolution_dropdown.get_item_text(index)
 	var new_size = RESOLUTIONS[res_name]
-	DisplayServer.window_set_size(new_size)
-	# Center the window
-	var screen_size = DisplayServer.screen_get_size()
-	var window_pos = (screen_size - new_size) / 2
+	DisplayManager.set_resolution(new_size)
+	
+	# Get current screen and center on THAT screen (not primary)
+	var current_screen = DisplayServer.window_get_current_screen()
+	var screen_size = DisplayServer.screen_get_size(current_screen)
+	var screen_position = DisplayServer.screen_get_position(current_screen)
+	var window_pos = screen_position + (screen_size - new_size) / 2
 	DisplayServer.window_set_position(window_pos)
 
 # Close button clicked

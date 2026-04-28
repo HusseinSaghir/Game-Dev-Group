@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqyi45alyvy4l"]
+[gd_scene load_steps=9 format=3 uid="uid://cutjrqcmr1tgc"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="Script" uid="uid://b77hovyeipih8" path="res://scripts/game_world/room_generator.gd" id="1_6rqyq"]
 [ext_resource type="Script" uid="uid://cjpkhbubdlgu" path="res://scripts/game_world/level.gd" id="1_d04yv"]
 [ext_resource type="PackedScene" uid="uid://4x4qpc4k7elb" path="res://scenes/rooms/floor.tscn" id="1_j8x4i"]
+[ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/melee_weapon_item.tscn" id="2_6rqyq"]
+[ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="3_j8x4i"]
+[ext_resource type="PackedScene" uid="uid://cotgjl8evk80q" path="res://scenes/items/weapon_items/weapon_shortbow_item.tscn" id="4_d04yv"]
+[ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
 
 [node name="GameWorld" type="Node2D"]
 position = Vector2(-411, -209)
@@ -14,4 +18,15 @@ script = ExtResource("1_6rqyq")
 
 [node name="Player" parent="." instance=ExtResource("1_0aysy")]
 
-[node name="Camera2D2" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="MeleeWeaponItem" parent="." instance=ExtResource("2_6rqyq")]
+position = Vector2(624, 304)
+
+[node name="Cricketshead" parent="." instance=ExtResource("3_j8x4i")]
+position = Vector2(424, 194)
+
+[node name="WeaponShortbowItem" parent="." instance=ExtResource("4_d04yv")]
+position = Vector2(534, 250)
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_s1315")]
