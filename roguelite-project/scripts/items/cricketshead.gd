@@ -13,6 +13,12 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	body.change_speed(20)
+	
+	var hud = get_tree().get_first_node_in_group("HUD")
+	
+	if hud:
+		hud.add_item($Sprite2D.texture)
+		
 	print("picked up")
 	queue_free()
 

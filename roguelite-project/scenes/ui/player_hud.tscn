@@ -1,0 +1,240 @@
+[gd_scene load_steps=8 format=3 uid="uid://c80d6ypkl56i8"]
+
+[ext_resource type="Texture2D" uid="uid://bkorqfm58btw2" path="res://assets/ui/ValueBar_128x16.png" id="1_31ty4"]
+[ext_resource type="Texture2D" uid="uid://dqxaks0f1d617" path="res://assets/ui/RectangleBox_96x96.png" id="1_hbwp2"]
+[ext_resource type="Script" uid="uid://cbsxdk4lblpfk" path="res://scripts/hud/player_hud.gd" id="1_nh6vl"]
+[ext_resource type="Texture2D" uid="uid://j6kunjvhurqp" path="res://assets/ui/HeartIcons_32x32.png" id="2_tfw32"]
+[ext_resource type="Texture2D" uid="uid://cs4mghej7be55" path="res://assets/ui/ValueRed_120x8.png" id="2_u16pa"]
+[ext_resource type="Texture2D" uid="uid://bqfh6diawhnih" path="res://assets/ui/ValueBlue_120x8.png" id="5_3cn05"]
+[ext_resource type="Texture2D" uid="uid://dx4ll56qomftw" path="res://assets/ui/TopPatternPanel_02_33x15.png" id="5_nh6vl"]
+
+[node name="PlayerHUD" type="CanvasLayer" groups=["HUD"]]
+process_mode = 3
+script = ExtResource("1_nh6vl")
+
+[node name="RootControl" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HealthUI" type="Control" parent="RootControl"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 80.0
+mouse_filter = 2
+
+[node name="HeartTexture" type="TextureRect" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 54.0
+offset_bottom = 51.0
+texture = ExtResource("1_hbwp2")
+expand_mode = 1
+
+[node name="HeartIcon" type="TextureRect" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 54.0
+offset_bottom = 51.0
+texture = ExtResource("2_tfw32")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="HPBar" type="TextureProgressBar" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 25.0
+offset_right = 176.0
+offset_bottom = 33.0
+value = 100.0
+texture_progress = ExtResource("2_u16pa")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 37.0
+offset_right = 176.0
+offset_bottom = 45.0
+value = 100.0
+texture_progress = ExtResource("5_3cn05")
+
+[node name="HPTexture" type="TextureRect" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 24.0
+offset_right = 179.0
+offset_bottom = 36.0
+texture = ExtResource("1_31ty4")
+expand_mode = 1
+
+[node name="StaminaTexture" type="TextureRect" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 36.0
+offset_right = 179.0
+offset_bottom = 48.0
+texture = ExtResource("1_31ty4")
+expand_mode = 1
+
+[node name="Decoration" type="TextureRect" parent="RootControl/HealthUI"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 12.0
+offset_right = 177.0
+offset_bottom = 23.0
+texture = ExtResource("5_nh6vl")
+
+[node name="Inventory" type="Control" parent="RootControl"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Slot1" type="Control" parent="RootControl/Inventory"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="RootControl/Inventory/Slot1"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_hbwp2")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="RootControl/Inventory/Slot1"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Slot2" type="Control" parent="RootControl/Inventory"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -20.0
+offset_right = 62.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="RootControl/Inventory/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_hbwp2")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="RootControl/Inventory/Slot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Slot3" type="Control" parent="RootControl/Inventory"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -20.0
+offset_right = -22.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="RootControl/Inventory/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_hbwp2")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="RootControl/Inventory/Slot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1

@@ -35,6 +35,7 @@ window/stretch/aspect="expand"
 Player="the group only for the player"
 Pickup="Any Pickup Items"
 Enemy=""
+HUD=""
 
 [input]
 
