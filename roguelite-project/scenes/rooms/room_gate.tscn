@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://360dt6w1t63o"]
+
+[ext_resource type="Texture2D" uid="uid://xh54ioheinlm" path="res://assets/art/tilesets/walls_floor.png" id="1_nx8nf"]
+[ext_resource type="Script" uid="uid://bb7le4rocpwd4" path="res://scripts/game_world/room_gate.gd" id="1_xhjfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx8nf"]
+size = Vector2(16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhjfx"]
+atlas = ExtResource("1_nx8nf")
+region = Rect2(32, 336, 16, 32)
+
+[node name="RoomGate" type="StaticBody2D"]
+script = ExtResource("1_xhjfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nx8nf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_xhjfx")

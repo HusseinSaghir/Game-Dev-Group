@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceItem" load_steps=3 format=3 uid="uid://bjmgbeb6mlg26"]
+
+[ext_resource type="Script" uid="uid://c78wxrhofanms" path="res://scripts/items/Resources/resource_item.gd" id="1_7lc68"]
+[ext_resource type="Texture2D" uid="uid://bxpn7ixsi5l71" path="res://assets/art/items/pickups/coin.webp" id="2_18u8x"]
+
+[resource]
+script = ExtResource("1_7lc68")
+display_name = "Coin"
+texture = ExtResource("2_18u8x")
+group = "Pickup"
+metadata/_custom_type_script = "uid://c78wxrhofanms"

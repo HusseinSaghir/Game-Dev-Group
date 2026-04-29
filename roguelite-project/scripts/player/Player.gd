@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 #Below we have Godot spevific annotations which we will be seeing often
 #@export makes a variable editable within the godot inspector on the right -> 
 #Great tool for debugging and testing fast!
@@ -20,8 +21,14 @@ extends CharacterBody2D
 var real_damage: int = 0
 #The total damage from any item that was picked up
 var applied_damage: int = 0
-# Animation node reference
+#Triggers I-Frames
+var iframes: bool = false
+#Animation node reference
 @onready var animated_sprite = $AnimatedSprite2D
+#Timer for the I-Frames
+@onready var flicker_timer = $AnimatedSprite2D/FlickerTimer
+#The Collision Body (hitbox)
+@onready var collision = $CollisionShape2D
 
 #Stores last direction for our idle animations
 var last_direction: Vector2 = Vector2.DOWN
@@ -123,3 +130,22 @@ func change_weapon_damage(weapond: int):
 	real_damage = 0
 	real_damage = weapond
 	real_damage += applied_damage
+	
+func trigger_iframes():
+	#Turn on I-Frames
+	iframes = true
+	flicker_timer.start(1)
+	#Disables collisions
+	collision.set_deferred("disabled", true)
+	while iframes:
+		#Makes sprite visible if invisible, makes it invisible if visible
+		animated_sprite.visible = !animated_sprite.visible
+		#Flicker speed
+		await get_tree().create_timer(0.05).timeout 
+	#Make sure it's visible when it's done
+	animated_sprite.visible = true 
+	#Re-enabled collisions
+	collision.set_deferred("disabled", false)
+
+func _on_flicker_timer_timeout() -> void:
+	iframes = false

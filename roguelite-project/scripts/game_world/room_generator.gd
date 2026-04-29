@@ -22,24 +22,34 @@ const SPAWN_SOURCE_ID := 2
 #---------------------------------------------------------------------------------------------------
 #FLOOR TILE COORDINATES
 #---------------------------------------------------------------------------------------------------
-const TILE_FLOOR := Vector2i(1, 1)
+const TILE_FLOOR := Vector2i(2, 8)
 const TILE_SPAWN := Vector2i(1, 1)
 
 #---------------------------------------------------------------------------------------------------
 #EDGE TILE COORDINATES
 #---------------------------------------------------------------------------------------------------
-const TILE_TOP_LEFT := Vector2i(0, 0)
-const TILE_TOP := Vector2i(1, 0)
-const TILE_TOP_RIGHT := Vector2i(2, 0)
-const TILE_LEFT := Vector2i(0, 1)
-const TILE_RIGHT := Vector2i(2, 1)
-const TILE_BOT_LEFT := Vector2i(0, 2)
-const TILE_BOTTOM := Vector2i(1, 2)
-const TILE_BOT_RIGHT := Vector2i(2, 2)
-const TILE_TOP_RIGHT_OUT := Vector2i(4, 0)
-const TILE_TOP_LEFT_OUT := Vector2i(3, 0)
-const TILE_BOT_RIGHT_OUT := Vector2i(4, 1)
-const TILE_BOT_LEFT_OUT := Vector2i(3, 1)
+const TILE_TOP_LEFT := Vector2i(1, 7)
+const TILE_TOP := Vector2i(2, 7)
+const TILE_TOP_RIGHT := Vector2i(3, 7)
+const TILE_LEFT := Vector2i(1, 8)
+const TILE_RIGHT := Vector2i(3, 8)
+const TILE_BOT_LEFT := Vector2i(11, 7)
+const TILE_BOTTOM := Vector2i(10, 6)
+const TILE_BOT_RIGHT := Vector2i(9, 7)
+const TILE_TOP_RIGHT_OUT := Vector2i(11, 6)
+const TILE_TOP_LEFT_OUT := Vector2i(9, 6)
+const TILE_BOT_RIGHT_OUT := Vector2i(7, 9)
+const TILE_BOT_LEFT_OUT := Vector2i(5, 9)
+const TILE_GATE_CLOSED := Vector2i(10, 25)
+const TILE_GATE_OPEN := Vector2i(6, 25)
+const TILE_GATE_SIDE := Vector2i(3, 21)
+
+#---------------------------------------------------------------------------------------------------
+#BOTTOM DROP-OFF TILE COORDINATES (row below the bottom edge)
+#---------------------------------------------------------------------------------------------------
+const TILE_BOT_LEFT_DROP  := Vector2i(11, 7)  # your atlas coords for the lower-left drop-off tile
+const TILE_BOTTOM_DROP    := Vector2i(10, 6)  # your atlas coords for the lower-center drop-off tile
+const TILE_BOT_RIGHT_DROP := Vector2i(9, 7)  # your atlas coords for the lower-right drop-off tile
 
 #---------------------------------------------------------------------------------------------------
 #VOID TILE COORDINATE
@@ -51,6 +61,9 @@ const TILE_VOID := Vector2i(1,1)
 #---------------------------------------------------------------------------------------------------
 @onready var ground_layer: TileMapLayer = $Ground
 @onready var player_spawn: Marker2D = $PlayerSpawn
+
+const TROOM_DOOR_SCENE = preload("res://scenes/rooms/troom_door.tscn")
+const ROOM_GATE_SCENE = preload("res://scenes/rooms/room_gate.tscn")
 
 #---------------------------------------------------------------------------------------------------
 #VARIABLES
@@ -116,7 +129,9 @@ func generate_dungeon(floor_number: int = 1) -> void:
 			"exit": exit_tile,
 			"entrance": entrance_tile,
 			"room_type": room_type,
-			"has_troom": has_troom
+			"has_troom": has_troom,
+			"enemy_container": null,
+			"room_gate": null
 		})
 		
 		cursor_x += w + ROOM_SPACING                                  #Set cursor_x for next room.
@@ -125,6 +140,13 @@ func generate_dungeon(floor_number: int = 1) -> void:
 	var total_height := 26 + VOID_BORDER * 2                          # map for _paint_void. 26 
 	_paint_void(total_width, total_height)                            # derived from MAX_HEIGHT 
 																	  # (16 in room_type.gd) + 10.
+	for i in range (_rooms.size()):
+		var room = _rooms[i]
+		var exit_tile = room["exit"]
+		var exit_top = Vector2i(exit_tile.x + 1, exit_tile.y)
+		var exit_bottom = Vector2i(exit_tile.x + 1, exit_tile.y + 1)
+		room["room_gate"] = _spawn_room_gate(exit_top, exit_bottom)
+	
 	for room in _rooms:
 		_paint_room(room["origin"], room["width"], room["height"], room["has_troom"]) #Paint room
 																					  # over void.
@@ -154,7 +176,9 @@ func _paint_void(total_width: int, total_height: int) -> void: #Paints void tile
 #PAINT ROOM TILES
 #---------------------------------------------------------------------------------------------------
 func _paint_room(origin: Vector2i, width: int, height: int, has_troom: bool) -> void:
-	for x in range(width):                             #Paints appropriate tiles for interior/edges.
+	# Erase void tiles covering the lower half of the 2-tall bottom edge tiles.
+	for x in range(width):
+		ground_layer.erase_cell(origin + Vector2i(x, height))
 		for y in range(height):
 			var coord := origin + Vector2i(x, y)
 			var is_left := x == 0
@@ -180,6 +204,7 @@ func _paint_room(origin: Vector2i, width: int, height: int, has_troom: bool) -> 
 				ground_layer.set_cell(coord, FLOOR_SOURCE_ID, TILE_RIGHT)
 			else:
 				ground_layer.set_cell(coord, FLOOR_SOURCE_ID, TILE_FLOOR)
+		
 	#-----------------------------------------------------------------------------------------------
 	#TREASURE ROOM GENERATION
 	#-----------------------------------------------------------------------------------------------
@@ -261,7 +286,27 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 			_paint_room(troom_origin, 5, 5, false)
 			ground_layer.set_cell(Vector2i(x_left, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_LEFT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_BOT_LEFT_OUT)
-		
+	_spawn_troom_door(troom_entrance_left, troom_entrance_right)
+
+#---------------------------------------------------------------------------------------------------
+#TREASURE ROOM DOOR AND ROOM GATE GENERATORS
+#---------------------------------------------------------------------------------------------------
+
+func _spawn_troom_door(entrance_left: Vector2i, entrance_right: Vector2i) -> void:
+	var door = TROOM_DOOR_SCENE.instantiate()
+	var left_tile = ground_layer.map_to_local(entrance_left)
+	var right_tile = ground_layer.map_to_local(entrance_right)
+	door.position = (left_tile + right_tile) / 2.0
+	add_child(door)
+
+func _spawn_room_gate(exit_top: Vector2i, exit_bottom: Vector2i) -> Node2D:
+	var door = ROOM_GATE_SCENE.instantiate()
+	var top_tile = ground_layer.map_to_local(exit_top)
+	var bottom_tile = ground_layer.map_to_local(exit_bottom)
+	door.position = (top_tile + bottom_tile) / 2.0
+	add_child(door)
+	return door
+
 #---------------------------------------------------------------------------------------------------
 #PLAYER SPAWN AT CENTER OF ROOM
 #---------------------------------------------------------------------------------------------------
