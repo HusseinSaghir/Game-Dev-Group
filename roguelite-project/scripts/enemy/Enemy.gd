@@ -45,22 +45,17 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not player:
+	var distance = position.distance_to(player.position)
+	
+	# Stop moving when close enough — prevents sticking to player
+	if distance < 8.0:
+		velocity = Vector2.ZERO
+		move_and_slide()
 		return
-	#Find's player's position relative to enemy
+	
 	var direction = (player.position - position).normalized()
-	#Movement Debug
-	#print(direction)
-	
-	#Sets velocity toward player's position
 	velocity = direction * speed
-	
-
-	#Handles animations for movement
 	update_animation(direction)
-
-	#Move the character
-	#This is really cool because we don't have to set specific vector params
 	move_and_slide()
 
 

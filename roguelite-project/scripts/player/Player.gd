@@ -229,4 +229,4 @@ func use_stamina_for_attack():
 # Since we do not have an animation for die or a scene for gameover, 
 # we would restart the level if player's health reaches 0. A
 func die():
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
