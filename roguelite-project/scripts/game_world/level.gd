@@ -62,9 +62,9 @@ func _ready() -> void:
 func _place_player() -> void:
 	var spawn: Marker2D = current_map.get_node("PlayerSpawn")
 	player.global_position = spawn.global_position
-	var test_weapon = TEST_WEAPON_SCENE.instantiate()
-	test_weapon.position = spawn.global_position + Vector2(32, 0)
-	add_child(test_weapon)
+	#var test_weapon = TEST_WEAPON_SCENE.instantiate()
+	#test_weapon.position = spawn.global_position + Vector2(32, 0)
+	#add_child(test_weapon)
 
 #---------------------------------------------------------------------------------------------------
 #EXIT BEHAVIOR

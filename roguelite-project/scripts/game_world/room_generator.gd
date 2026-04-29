@@ -140,12 +140,12 @@ func generate_dungeon(floor_number: int = 1) -> void:
 	var total_height := 26 + VOID_BORDER * 2                          # map for _paint_void. 26 
 	_paint_void(total_width, total_height)                            # derived from MAX_HEIGHT 
 																	  # (16 in room_type.gd) + 10.
-	for i in range (_rooms.size()):
-		var room = _rooms[i]
-		var exit_tile = room["exit"]
-		var exit_top = Vector2i(exit_tile.x + 1, exit_tile.y)
-		var exit_bottom = Vector2i(exit_tile.x + 1, exit_tile.y + 1)
-		room["room_gate"] = _spawn_room_gate(exit_top, exit_bottom)
+	#for i in range(1, _rooms.size()):
+		#var room = _rooms[i]
+		#var exit_tile = room["exit"]
+		#var exit_top = Vector2i(exit_tile.x + 1, exit_tile.y)
+		#var exit_bottom = Vector2i(exit_tile.x + 1, exit_tile.y + 1)
+		#room["room_gate"] = _spawn_room_gate(exit_top, exit_bottom)
 	
 	for room in _rooms:
 		_paint_room(room["origin"], room["width"], room["height"], room["has_troom"]) #Paint room
