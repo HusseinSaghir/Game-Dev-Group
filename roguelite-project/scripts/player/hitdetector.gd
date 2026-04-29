@@ -3,6 +3,8 @@ extends Area2D
 #Script for checking if the enemy hits the hitbox
 @onready var audio = $"../../AudioStreamPlayer2D"
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -14,7 +16,11 @@ func _process(delta: float) -> void:
 
 # Play a test audio on collision
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and !get_parent().iframes:
+	if body is Enemy and !get_parent().iframes:
+		print_debug("[HitDetector] Hit by Enemy '", body.name, "' for ", body.damage, " dmg")
 		audio.play()
+		get_parent().take_damage(body.damage)
 		if get_parent().has_method("trigger_iframes"):
 			get_parent().trigger_iframes()
+	else:
+		print_debug("[HitDetector] Body entered (ignored): ", body.name)

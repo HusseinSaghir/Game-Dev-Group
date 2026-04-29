@@ -1,38 +1,39 @@
+<<<<<<< HEAD
 [gd_scene load_steps=13 format=3 uid="uid://blppgvhnnp054"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/weapon_sword_item.tscn" id="2_6rqyq"]
+=======
+[gd_scene load_steps=9 format=3 uid="uid://bqyi45alyvy4l"]
+
+[ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648
 [ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
-[ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="3_j8x4i"]
-[ext_resource type="PackedScene" uid="uid://cotgjl8evk80q" path="res://scenes/items/weapon_items/weapon_shortbow_item.tscn" id="4_d04yv"]
 [ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
-[ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="6_jh4w7"]
 [ext_resource type="Script" uid="uid://b77hovyeipih8" path="res://scripts/game_world/room_generator.gd" id="6_rqyq"]
 [ext_resource type="Script" uid="uid://cjpkhbubdlgu" path="res://scripts/game_world/level.gd" id="7_d04yv"]
-[ext_resource type="AudioStream" uid="uid://c0begnlpdod1v" path="res://assets/audio/sfx/sm64-mario-pain.ogg" id="7_pv02e"]
+[ext_resource type="AudioStream" uid="uid://doxrys7o0llax" path="res://assets/audio/sfx/sm64-mario-pain.ogg" id="7_pv02e"]
 [ext_resource type="PackedScene" uid="uid://4x4qpc4k7elb" path="res://scenes/rooms/floor.tscn" id="8_j8x4i"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://13t38se3orbd" path="res://scenes/items/pickups/pickup_key.tscn" id="12_86f4y"]
+=======
+[ext_resource type="PackedScene" uid="uid://c80d6ypkl56i8" path="res://scenes/ui/player_hud.tscn" id="12_86f4y"]
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("7_d04yv")
 
+[node name="ItemContainer" type="Node2D" parent="."]
+
 [node name="Map" parent="." instance=ExtResource("8_j8x4i")]
 script = ExtResource("6_rqyq")
 
-[node name="Player" parent="." instance=ExtResource("1_0aysy")]
+[node name="Player" parent="." node_paths=PackedStringArray("player_hud") instance=ExtResource("1_0aysy")]
 position = Vector2(507, 319)
+player_hud = NodePath("../PlayerHUD")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
-
-[node name="MeleeWeaponItem" parent="." instance=ExtResource("2_6rqyq")]
-position = Vector2(443, 193)
-
-[node name="Cricketshead" parent="." instance=ExtResource("3_j8x4i")]
-position = Vector2(424, 194)
-
-[node name="WeaponShortbowItem" parent="." instance=ExtResource("4_d04yv")]
-position = Vector2(455, 194)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_s1315")]
 visible = false
@@ -44,6 +45,7 @@ visible = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_pv02e")
 
+<<<<<<< HEAD
 [node name="pickup_key" parent="." instance=ExtResource("12_86f4y")]
 position = Vector2(466, 193)
 
@@ -52,3 +54,9 @@ position = Vector2(466, 193)
 [node name="Enemy" parent="enemy_container" node_paths=PackedStringArray("player") instance=ExtResource("6_jh4w7")]
 position = Vector2(813, 315)
 player = NodePath("../../Player")
+=======
+[node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_86f4y")]
+player = NodePath("../Player")
+
+[editable path="PlayerHUD"]
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648

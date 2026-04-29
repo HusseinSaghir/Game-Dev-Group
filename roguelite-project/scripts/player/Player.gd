@@ -17,6 +17,8 @@ class_name Player
 
 #Movement variables
 @export var speed: float = 100.0
+# Match this to whichever physics layer number your enemies are on
+@export var enemy_collision_layer: int = 2
 #The real total damage variable for both weapon and items
 var real_damage: int = 0
 #The total damage from any item that was picked up
@@ -29,18 +31,36 @@ var iframes: bool = false
 @onready var flicker_timer = $AnimatedSprite2D/FlickerTimer
 #The Collision Body (hitbox)
 @onready var collision = $CollisionShape2D
+#Hitdetection reference
+@onready var hitdetector = $Area2D  
 
 #Stores last direction for our idle animations
 var last_direction: Vector2 = Vector2.DOWN
 
+# --- HUD Reference --- 
+@export var player_hud: Node
 
+# --- HEALTH ---
+var max_health := 100 
+var current_health := 100 
+
+# --- STAMINA ---
+var current_stamina := 100.0
+var max_stamina := 100.0
+var stamina_cost := 10.0
+var stamina_regen := 20.0
 
 func _ready():
 	#Play initial idle animation
 	animated_sprite.play("idle_down")
+	
+	
 
 
 func _physics_process(_delta):
+	# DAMAGE DEBUG
+	if Input.is_action_just_pressed("ui_accept"):
+		take_damage(10)
 		 # DEBUG - Check if input is working
 		 # Godot has built in preset commands but I did these myself
 		 # To do so go to Project -> Project Settings -> Input mapping
@@ -72,6 +92,14 @@ func _physics_process(_delta):
 	#Move the character
 	#This is really cool because we don't have to set specific vector params
 	move_and_slide()
+	
+	# --- STAMINA REGEN ---
+	current_stamina += stamina_regen * _delta
+	current_stamina = clamp(current_stamina, 0, max_stamina)
+	
+	# --- UPDATE HUD ---
+	if player_hud: 
+		player_hud.set_stamina(current_stamina)
 
 
 func update_animation(direction: Vector2):
@@ -132,20 +160,57 @@ func change_weapon_damage(weapond: int):
 	real_damage += applied_damage
 	
 func trigger_iframes():
-	#Turn on I-Frames
 	iframes = true
 	flicker_timer.start(1)
-	#Disables collisions
-	collision.set_deferred("disabled", true)
+	hitdetector.set_deferred("monitoring", false)
+	set_collision_mask_value(enemy_collision_layer, false)
+	print_debug("[Player] I-frames ON — enemy collision layer ", enemy_collision_layer, " disabled")
+	
 	while iframes:
-		#Makes sprite visible if invisible, makes it invisible if visible
 		animated_sprite.visible = !animated_sprite.visible
-		#Flicker speed
-		await get_tree().create_timer(0.05).timeout 
-	#Make sure it's visible when it's done
-	animated_sprite.visible = true 
-	#Re-enabled collisions
-	collision.set_deferred("disabled", false)
+		await get_tree().create_timer(0.05).timeout
+	
+	animated_sprite.visible = true
+	animated_sprite.modulate = Color.WHITE
+	hitdetector.set_deferred("monitoring", true)
+	set_collision_mask_value(enemy_collision_layer, true)
+	print_debug("[Player] I-frames OFF — collision restored")
 
 func _on_flicker_timer_timeout() -> void:
 	iframes = false
+	
+# Currently we apply damage, this function take damage from enemy and apply to 
+# player so we can end the game if we take too much damage
+func take_damage(amount: float):
+	current_health -= amount
+	current_health = clamp(current_health, 0, max_health)
+	
+	print_debug("[Player] Took ", amount, " damage → Health: ", current_health, "/", max_health)
+	
+	var tween = create_tween()
+	tween.tween_property(animated_sprite, "modulate", Color(1.0, 0.2, 0.2), 0.05)
+	tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.15)
+	
+	if player_hud:
+		player_hud.on_damage_taken(current_health)
+	
+	if current_health <= 0:
+		die()
+		
+# --- ATTACK (STAMINA USAGE) ---
+func use_stamina_for_attack():
+	if current_stamina < stamina_cost:
+		print("Not enough stamina")
+		return false
+		
+	current_stamina -= stamina_cost
+	current_stamina = clamp(current_stamina, 0, max_stamina)
+	
+	if player_hud: 
+		player_hud.set_stamina(current_stamina)
+	
+	return true
+# Since we do not have an animation for die or a scene for gameover, 
+# we would restart the level if player's health reaches 0. A
+func die():
+	get_tree().reload_current_scene()

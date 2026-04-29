@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgix1poil4vav"]
+[gd_scene load_steps=10 format=3 uid="uid://bgix1poil4vav"]
 
 [ext_resource type="FontFile" uid="uid://dc1nusaugeumi" path="res://assets/fonts/CompassGold.ttf" id="1_0lmf7"]
 [ext_resource type="Script" uid="uid://dba3oij87w0bo" path="res://scripts/core/pause_menu.gd" id="1_f6eus"]
 [ext_resource type="Script" uid="uid://vd264qdqn71i" path="res://scripts/core/settings_menu.gd" id="2_f6eus"]
+[ext_resource type="Texture2D" uid="uid://bprh2scl1gurl" path="res://assets/ui/CharacterBox_56x57.png" id="4_2rlsb"]
+[ext_resource type="Texture2D" uid="uid://jfpx21wtnud0" path="res://assets/ui/PatternMiddleBottomBG_199x48.png" id="5_coo1x"]
+[ext_resource type="Texture2D" uid="uid://3kgkr0r0jaag" path="res://assets/art/characters/character_base_16x16.png" id="6_2jkta"]
+[ext_resource type="Texture2D" uid="uid://beybg5cy7dlr3" path="res://assets/ui/AttributesBar_41x9.png" id="7_ht4ye"]
+[ext_resource type="Texture2D" uid="uid://cue7kmdw75gu6" path="res://assets/ui/AttributesIcons_17x17.png" id="8_7yca1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rlsb"]
+atlas = ExtResource("6_2jkta")
+region = Rect2(0, 0, 16, 16)
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_f6eus")
@@ -156,3 +165,121 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_0lmf7")
 theme_override_font_sizes/font_size = 19
 text = "Close"
+
+[node name="StatsPanel" type="Control" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -100.0
+offset_right = -120.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Box" type="TextureRect" parent="StatsPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_2rlsb")
+
+[node name="BoxHead" type="TextureRect" parent="StatsPanel/Box"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = -45.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+scale = Vector2(0.9599951, 1)
+mouse_filter = 2
+texture = ExtResource("5_coo1x")
+
+[node name="Health" type="Label" parent="StatsPanel"]
+process_mode = 3
+layout_mode = 0
+offset_left = 22.0
+offset_top = 82.0
+offset_right = 65.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("1_0lmf7")
+text = "Health:"
+
+[node name="TextureRect" type="TextureRect" parent="StatsPanel/Health"]
+process_mode = 3
+layout_mode = 0
+offset_left = 60.0
+offset_top = 4.0
+offset_right = 101.0
+offset_bottom = 44.0
+scale = Vector2(1.76, 0.24000242)
+mouse_filter = 2
+texture = ExtResource("7_ht4ye")
+
+[node name="Stamina" type="Label" parent="StatsPanel"]
+process_mode = 3
+layout_mode = 0
+offset_left = 23.0
+offset_top = 106.0
+offset_right = 66.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("1_0lmf7")
+text = "Stamina:"
+
+[node name="TextureRect2" type="TextureRect" parent="StatsPanel/Stamina"]
+process_mode = 3
+layout_mode = 0
+offset_left = 59.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 44.0
+scale = Vector2(1.76, 0.24000242)
+mouse_filter = 2
+texture = ExtResource("7_ht4ye")
+
+[node name="CharacterPreview" type="TextureRect" parent="StatsPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 17.0
+offset_right = 20.0
+offset_bottom = 57.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_2rlsb")
+
+[node name="Attributes" type="TextureRect" parent="StatsPanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -57.0
+offset_right = 34.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 0.43999755)
+mouse_filter = 2
+texture = ExtResource("8_7yca1")

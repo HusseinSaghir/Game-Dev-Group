@@ -187,16 +187,30 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
+<<<<<<< HEAD
 size = Vector2(12, 8)
+=======
+size = Vector2(25.5, 30)
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy", "enemy"]]
 script = ExtResource("1_im2q6")
+speed = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(16, 17)
+<<<<<<< HEAD
+=======
+scale = Vector2(1, 0.977)
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648
 sprite_frames = SubResource("SpriteFrames_7lmhl")
 animation = &"walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+<<<<<<< HEAD
 position = Vector2(16, 20)
+=======
+position = Vector2(16, 16.5)
+scale = Vector2(0.5, 0.5)
+>>>>>>> 34335f564a863290a4f804bb7269b18ef2e1b648
 shape = SubResource("RectangleShape2D_a3pup")
