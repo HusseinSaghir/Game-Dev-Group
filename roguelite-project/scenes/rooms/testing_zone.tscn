@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cp81dgryhn71v"]
+[gd_scene load_steps=13 format=3 uid="uid://cp81dgryhn71v"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cilr5gqjv26s0" path="res://scenes/items/pickups/pickup_coin.tscn" id="7_1yvp6"]
 [ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/damage_gem.tscn" id="8_3ntna"]
 [ext_resource type="PackedScene" uid="uid://13t38se3orbd" path="res://scenes/items/pickups/pickup_key.tscn" id="9_t4rt3"]
-[ext_resource type="PackedScene" uid="uid://butyqs8yu7k1n" path="res://scenes/items/slotMachine/slots.tscn" id="10_t4rt3"]
+[ext_resource type="PackedScene" path="res://scenes/items/slotMachine/slots.tscn" id="10_t4rt3"]
 [ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="11_qx2u2"]
+[ext_resource type="AudioStream" uid="uid://deofwwox3pwo8" path="res://assets/audio/music/blossom.wav" id="12_ms50l"]
 
 [node name="GameWorld2" type="Node2D"]
 
@@ -57,3 +58,7 @@ position = Vector2(593, 286)
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_qx2u2")]
 position = Vector2(567, 364)
 player = NodePath("../Player")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ms50l")
+autoplay = true
