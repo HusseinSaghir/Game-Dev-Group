@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 GameManager="*res://autoload/GameManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
 DisplayManager="*res://autoload/DisplayManager.gd"
+DevMenu="*res://scripts/dev/dev_menu.gd"
 
 [display]
 
