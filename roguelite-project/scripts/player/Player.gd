@@ -21,20 +21,42 @@ class_name Player
 var real_damage: int = 0
 #The total damage from any item that was picked up
 var applied_damage: int = 0
-# Animation node reference
+#Triggers I-Frames
+var iframes: bool = false
+#Animation node reference
 @onready var animated_sprite = $AnimatedSprite2D
+#Timer for the I-Frames
+@onready var flicker_timer = $AnimatedSprite2D/FlickerTimer
+#The Collision Body (hitbox)
+@onready var collision = $CollisionShape2D
 
 #Stores last direction for our idle animations
 var last_direction: Vector2 = Vector2.DOWN
 
+# --- HUD Reference --- 
+@export var player_hud: Node
 
+# --- HEALTH ---
+var max_health := 100 
+var current_health := 100 
+
+# --- STAMINA ---
+var current_stamina := 100.0
+var max_stamina := 100.0
+var stamina_cost := 10.0
+var stamina_regen := 20.0
 
 func _ready():
 	#Play initial idle animation
 	animated_sprite.play("idle_down")
+	
+	
 
 
 func _physics_process(_delta):
+	# DAMAGE DEBUG
+	if Input.is_action_just_pressed("ui_accept"):
+		take_damage(10)
 		 # DEBUG - Check if input is working
 		 # Godot has built in preset commands but I did these myself
 		 # To do so go to Project -> Project Settings -> Input mapping
@@ -66,6 +88,14 @@ func _physics_process(_delta):
 	#Move the character
 	#This is really cool because we don't have to set specific vector params
 	move_and_slide()
+	
+	# --- STAMINA REGEN ---
+	current_stamina += stamina_regen * _delta
+	current_stamina = clamp(current_stamina, 0, max_stamina)
+	
+	# --- UPDATE HUD ---
+	if player_hud: 
+		player_hud.set_stamina(current_stamina)
 
 
 func update_animation(direction: Vector2):
@@ -111,12 +141,24 @@ func play_idle_animation():
 #This function is called whenever a item is picked up that changes a damage value
 func change_damage(amount: int):
 	applied_damage += amount
-	real_damage += applied_damage
+	real_damage += amount
+
 
 #This function is called whenever a tiem is picked up that changes a speed value
 func change_speed(amount: int):
 	speed += amount
+
+
+#This function is called whenever a item is picked up that changes the max hp value
+func change_health(amount: int):
+	max_health += amount
 	
+
+#This function is called whenever a item is picked up that changes the max stam value
+func change_stam(amount: int):
+	max_stamina += amount
+	
+
 #This function is called whenever you change a weapon
 #It will set the real_damage to 0  then get the damage value of the weapon that was picked up
 #It will then add that and the applied_damage to real_damage
@@ -124,3 +166,52 @@ func change_weapon_damage(weapond: int):
 	real_damage = 0
 	real_damage = weapond
 	real_damage += applied_damage
+	
+func trigger_iframes():
+	#Turn on I-Frames
+	iframes = true
+	flicker_timer.start(1)
+	#Disables collisions
+	collision.set_deferred("disabled", true)
+	while iframes:
+		#Makes sprite visible if invisible, makes it invisible if visible
+		animated_sprite.visible = !animated_sprite.visible
+		#Flicker speed
+		await get_tree().create_timer(0.05).timeout 
+	#Make sure it's visible when it's done
+	animated_sprite.visible = true 
+	#Re-enabled collisions
+	collision.set_deferred("disabled", false)
+
+func _on_flicker_timer_timeout() -> void:
+	iframes = false
+	
+# Currently we apply damage, this function take damage from enemy and apply to 
+# player so we can end the game if we take too much damage
+func take_damage(amount: float):
+	current_health -= amount
+	current_health = clamp(current_health, 0, max_health)
+	
+	if player_hud: 
+		player_hud.set_health(current_health)
+		
+	if current_health <= 0:
+		die()
+		
+# --- ATTACK (STAMINA USAGE) ---
+func use_stamina_for_attack():
+	if current_stamina < stamina_cost:
+		print("Not enough stamina")
+		return false
+		
+	current_stamina -= stamina_cost
+	current_stamina = clamp(current_stamina, 0, max_stamina)
+	
+	if player_hud: 
+		player_hud.set_stamina(current_stamina)
+	
+	return true
+# Since we do not have an animation for die or a scene for gameover, 
+# we would restart the level if player's health reaches 0. A
+func die():
+	get_tree().reload_current_scene()

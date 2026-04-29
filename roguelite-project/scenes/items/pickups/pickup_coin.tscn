@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xavuamm0brup" path="res://scripts/items/pickups/pickup.gd" id="1_diqcf"]
 [ext_resource type="Resource" uid="uid://bjmgbeb6mlg26" path="res://scripts/items/Resources/pickup/resource_coin.tres" id="2_0d0bn"]
-[ext_resource type="Texture2D" uid="uid://bxpn7ixsi5l71" path="res://assets/art/items/pickups/coin.webp" id="2_mxd6y"]
+[ext_resource type="Texture2D" uid="uid://clv40slddxjxw" path="res://assets/art/items/pickups/goldcoin.png" id="3_pradj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0d0bn"]
 radius = 4.0
@@ -12,9 +12,9 @@ script = ExtResource("1_diqcf")
 resource_type = ExtResource("2_0d0bn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.9073486e-06, 0)
-scale = Vector2(0.5, 0.423)
-texture = ExtResource("2_mxd6y")
+position = Vector2(0, -2)
+scale = Vector2(0.8125001, 0.6995)
+texture = ExtResource("3_pradj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0d0bn")

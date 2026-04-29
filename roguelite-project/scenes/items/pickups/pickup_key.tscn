@@ -1,19 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://13t38se3orbd"]
 
 [ext_resource type="Script" uid="uid://xavuamm0brup" path="res://scripts/items/pickups/pickup.gd" id="1_qgk4l"]
-[ext_resource type="Texture2D" uid="uid://b8qcvfd1x0fhu" path="res://assets/art/items/pickups/Key.webp" id="1_qry0g"]
 [ext_resource type="Resource" uid="uid://cu155wujq2eji" path="res://scripts/items/Resources/pickup/resource_key.tres" id="2_r533a"]
+[ext_resource type="Texture2D" uid="uid://chau8bpopy0r7" path="res://assets/art/items/pickups/pack1_32_25.png" id="3_r533a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38ht8"]
-size = Vector2(8, 10)
+size = Vector2(6, 6)
 
 [node name="pickup_key" type="Area2D" groups=["Pickup"]]
 script = ExtResource("1_qgk4l")
 resource_type = ExtResource("2_r533a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Pickup"]]
-scale = Vector2(0.5, 0.481)
-texture = ExtResource("1_qry0g")
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.21875, 0.20925)
+texture = ExtResource("3_r533a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_38ht8")

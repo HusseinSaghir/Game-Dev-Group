@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd2d0m0vo4omo"]
+
+[ext_resource type="Script" uid="uid://yyql2okuuv8b" path="res://scripts/items/damage_gem.gd" id="1_665cr"]
+[ext_resource type="Resource" uid="uid://ce51t6xnpdnff" path="res://scripts/items/Resources/passive/resource_cricketshead.tres" id="2_q33tw"]
+[ext_resource type="Texture2D" uid="uid://bfvxqhordhp8q" path="res://assets/art/items/damagegem.png" id="3_q33tw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1mrux"]
+radius = 4.0
+
+[node name="Damage_Gem" type="Area2D"]
+script = ExtResource("1_665cr")
+resource_type = ExtResource("2_q33tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.4901161e-08, 0)
+scale = Vector2(0.48124996, 0.45125002)
+texture = ExtResource("3_q33tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1mrux")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,12 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dgkk3e2lkjt30"]
+[gd_scene load_steps=29 format=3 uid="uid://dgkk3e2lkjt30"]
 
 [ext_resource type="Script" uid="uid://dfo4nkmjeqolq" path="res://scripts/player/Player.gd" id="1_abrql"]
+[ext_resource type="Script" uid="uid://b5hieoonh26cf" path="res://scripts/player/hitdetector.gd" id="2_lvxji"]
 [ext_resource type="Texture2D" uid="uid://3kgkr0r0jaag" path="res://assets/art/characters/character_base_16x16.png" id="2_sglur"]
 [ext_resource type="Script" uid="uid://c8y6chk1fjlav" path="res://scripts/weapons/weapon_structure/player_weapons.gd" id="3_lvxji"]
 [ext_resource type="Script" uid="uid://dnw6scfml340o" path="res://scripts/player/Inventory.gd" id="4_lvxji"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(8, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_sglur")
@@ -191,22 +189,39 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(8, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
+size = Vector2(8, 11)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-position = Vector2(571, 299)
 script = ExtResource("1_abrql")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_onrkg")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1.847744e-06, 2.026558e-06)
-scale = Vector2(0.75, 0.732)
+position = Vector2(0, 1.9073486e-06)
+scale = Vector2(0.75, 0.6785)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
 animation = &"idle_right"
 frame_progress = 0.42388192
+
+[node name="FlickerTimer" type="Timer" parent="AnimatedSprite2D"]
+one_shot = true
 
 [node name="PlayerWeapons" type="Node2D" parent="."]
 script = ExtResource("3_lvxji")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("4_lvxji")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_lvxji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lvxji")
+
+[connection signal="timeout" from="AnimatedSprite2D/FlickerTimer" to="." method="_on_flicker_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

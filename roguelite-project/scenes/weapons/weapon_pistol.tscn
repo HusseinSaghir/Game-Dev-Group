@@ -1,16 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5u7xalp57e7m"]
+[gd_scene load_steps=6 format=3 uid="uid://c5u7xalp57e7m"]
 
 [ext_resource type="Script" uid="uid://cj1l2g1suf4bh" path="res://scripts/weapons/weapon_pistol.gd" id="1_mykhn"]
-[ext_resource type="Texture2D" uid="uid://n47jeavgwd10" path="res://assets/art/weapons/wpn_piston.png" id="1_wsrb1"]
+[ext_resource type="Texture2D" uid="uid://5f0wk2r22vnw" path="res://assets/art/weapons/wpn_pistol.png" id="2_mykhn"]
+
+[sub_resource type="Animation" id="Animation_mykhn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_52uuu"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15155052, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7.0000005, -2.3841858e-07), Vector2(10, 0), Vector2(10, 0), Vector2(7.0000005, -2.3841858e-07)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6t6ak"]
+_data = {
+&"RESET": SubResource("Animation_mykhn"),
+&"attack": SubResource("Animation_52uuu")
+}
 
 [node name="WeaponPistol" type="Node2D"]
 script = ExtResource("1_mykhn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, 1.3969839e-09)
-rotation = 6.286676
-scale = Vector2(0.03945054, 0.034469012)
-texture = ExtResource("1_wsrb1")
+position = Vector2(7, 0)
+rotation = 6.2831855
+scale = Vector2(0.7298651, 0.50466603)
+texture = ExtResource("2_mykhn")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(13, -2)
+position = Vector2(14, -0.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6t6ak")
+}

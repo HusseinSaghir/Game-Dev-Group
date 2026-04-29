@@ -13,9 +13,9 @@ extends EquipItem
 #The amount of bullets that will be with each shot
 @export var bullet_count: int = 3
 @onready var muzzle : Marker2D = $Marker2D
-
+@onready var anim : AnimationPlayer = $AnimationPlayer
 #Currently on standby
-#@onready var anim : AnimationPlayer = $AnimationPlayer
+
 #@onready var hit_box : Area2D = $Hitbox
 
 const BULLET = preload("res://scenes/weapons/Projectile/shortbow_projectile.tscn")
@@ -29,7 +29,7 @@ const BULLET = preload("res://scenes/weapons/Projectile/shortbow_projectile.tscn
 # hit box
 # For when the action "attack" is pressed and will cause 
 func _use():
-	#anim.play("attack")
+	anim.play("attack")
 	
 	for i in bullet_count:
 		var bullet_instance = BULLET.instantiate()

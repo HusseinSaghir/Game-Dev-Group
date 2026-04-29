@@ -22,24 +22,31 @@ const SPAWN_SOURCE_ID := 2
 #---------------------------------------------------------------------------------------------------
 #FLOOR TILE COORDINATES
 #---------------------------------------------------------------------------------------------------
-const TILE_FLOOR := Vector2i(1, 1)
+const TILE_FLOOR := Vector2i(2, 8)
 const TILE_SPAWN := Vector2i(1, 1)
 
 #---------------------------------------------------------------------------------------------------
 #EDGE TILE COORDINATES
 #---------------------------------------------------------------------------------------------------
-const TILE_TOP_LEFT := Vector2i(0, 0)
-const TILE_TOP := Vector2i(1, 0)
-const TILE_TOP_RIGHT := Vector2i(2, 0)
-const TILE_LEFT := Vector2i(0, 1)
-const TILE_RIGHT := Vector2i(2, 1)
-const TILE_BOT_LEFT := Vector2i(0, 2)
-const TILE_BOTTOM := Vector2i(1, 2)
-const TILE_BOT_RIGHT := Vector2i(2, 2)
-const TILE_TOP_RIGHT_OUT := Vector2i(4, 0)
-const TILE_TOP_LEFT_OUT := Vector2i(3, 0)
-const TILE_BOT_RIGHT_OUT := Vector2i(4, 1)
-const TILE_BOT_LEFT_OUT := Vector2i(3, 1)
+const TILE_TOP_LEFT := Vector2i(1, 7)
+const TILE_TOP := Vector2i(2, 7)
+const TILE_TOP_RIGHT := Vector2i(3, 7)
+const TILE_LEFT := Vector2i(1, 8)
+const TILE_RIGHT := Vector2i(3, 8)
+const TILE_BOT_LEFT := Vector2i(11, 7)
+const TILE_BOTTOM := Vector2i(10, 6)
+const TILE_BOT_RIGHT := Vector2i(9, 7)
+const TILE_TOP_RIGHT_OUT := Vector2i(11, 6)
+const TILE_TOP_LEFT_OUT := Vector2i(9, 6)
+const TILE_BOT_RIGHT_OUT := Vector2i(7, 9)
+const TILE_BOT_LEFT_OUT := Vector2i(5, 9)
+
+#---------------------------------------------------------------------------------------------------
+#BOTTOM DROP-OFF TILE COORDINATES (row below the bottom edge)
+#---------------------------------------------------------------------------------------------------
+const TILE_BOT_LEFT_DROP  := Vector2i(11, 7)  # your atlas coords for the lower-left drop-off tile
+const TILE_BOTTOM_DROP    := Vector2i(10, 6)  # your atlas coords for the lower-center drop-off tile
+const TILE_BOT_RIGHT_DROP := Vector2i(9, 7)  # your atlas coords for the lower-right drop-off tile
 
 #---------------------------------------------------------------------------------------------------
 #VOID TILE COORDINATE
@@ -154,7 +161,9 @@ func _paint_void(total_width: int, total_height: int) -> void: #Paints void tile
 #PAINT ROOM TILES
 #---------------------------------------------------------------------------------------------------
 func _paint_room(origin: Vector2i, width: int, height: int, has_troom: bool) -> void:
-	for x in range(width):                             #Paints appropriate tiles for interior/edges.
+	# Erase void tiles covering the lower half of the 2-tall bottom edge tiles.
+	for x in range(width):
+		ground_layer.erase_cell(origin + Vector2i(x, height))
 		for y in range(height):
 			var coord := origin + Vector2i(x, y)
 			var is_left := x == 0
@@ -180,6 +189,7 @@ func _paint_room(origin: Vector2i, width: int, height: int, has_troom: bool) -> 
 				ground_layer.set_cell(coord, FLOOR_SOURCE_ID, TILE_RIGHT)
 			else:
 				ground_layer.set_cell(coord, FLOOR_SOURCE_ID, TILE_FLOOR)
+		
 	#-----------------------------------------------------------------------------------------------
 	#TREASURE ROOM GENERATION
 	#-----------------------------------------------------------------------------------------------
