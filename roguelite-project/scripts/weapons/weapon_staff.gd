@@ -5,7 +5,7 @@ extends EquipItem
 #Variables for the sub nodes for the weapon scene
 #For knockback if we want it
 @export var hit_force : float
-#@onready var anim : AnimationPlayer = $AnimationPlayer
+@onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var muzzle : Marker2D = $Marker2D
 
 const BULLET = preload("res://scenes/weapons/Projectile/staff_projectile.tscn")
@@ -15,7 +15,7 @@ const BULLET = preload("res://scenes/weapons/Projectile/staff_projectile.tscn")
 # hit box
 # For when the action "attack" is pressed and will cause 
 func _use():
-	#anim.play("attack")
+	anim.play("attack")
 	
 	var bullet_instance = BULLET.instantiate()
 	bullet_instance.weapon_ref = self

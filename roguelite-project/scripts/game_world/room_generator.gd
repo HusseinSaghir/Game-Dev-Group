@@ -71,7 +71,8 @@ const ROOM_GATE_SCENE = preload("res://scenes/rooms/room_gate.tscn")
 var num_rooms := randi_range(5, 8) #Random number of rooms between 5 and 8
 var _room_sequence: Array = []     #Stores sequence of room types.
 var _rooms: Array = []             #Stores each room by origin, width, and height.
-var _room_types: Array = []        #Stores possible room types.
+var _room_types: Array = []  
+var _troom_origins: Array[Vector2i] = []      #Stores possible room types.
 
 #---------------------------------------------------------------------------------------------------
 #READY FUNCTION
@@ -97,6 +98,7 @@ func generate_sequence() -> void:
 #FLOOR GENERATION
 #---------------------------------------------------------------------------------------------------
 func generate_dungeon(floor_number: int = 1) -> void:
+	_troom_origins.clear()
 	ground_layer.clear()                            #Clear previous tiles and rooms.
 	_rooms.clear()
 	
@@ -287,7 +289,8 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 			ground_layer.set_cell(Vector2i(x_left, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_LEFT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y + troom_hall_length), FLOOR_SOURCE_ID, TILE_BOT_LEFT_OUT)
 	_spawn_troom_door(troom_entrance_left, troom_entrance_right)
-
+	_troom_origins.append(troom_origin)
+	
 #---------------------------------------------------------------------------------------------------
 #TREASURE ROOM DOOR AND ROOM GATE GENERATORS
 #---------------------------------------------------------------------------------------------------
@@ -353,3 +356,8 @@ func get_rooms() -> Array:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+#---------------------------------------------------------------------------------------------------
+#GET TREASURE ROOM ORIGINS (Self-explanatory)
+#---------------------------------------------------------------------------------------------------
+func get_troom_origins() -> Array[Vector2i]:
+	return _troom_origins

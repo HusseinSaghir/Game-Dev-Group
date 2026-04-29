@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfbxcjtnhewns"]
+
+[ext_resource type="Texture2D" uid="uid://svo6f0d5eqfe" path="res://assets/art/items/cheese.png" id="1_hdgap"]
+[ext_resource type="Script" uid="uid://4ouys6sodspr" path="res://scripts/items/cheese.gd" id="1_yxr1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdgap"]
+radius = 4.0
+
+[node name="Cheese" type="Area2D"]
+script = ExtResource("1_yxr1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.1920929e-07, 3.5527137e-15)
+scale = Vector2(0.54296875, 0.4619141)
+texture = ExtResource("1_hdgap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hdgap")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

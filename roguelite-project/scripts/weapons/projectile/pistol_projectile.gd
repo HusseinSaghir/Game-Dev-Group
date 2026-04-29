@@ -19,8 +19,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.is_in_group("Enemy"):
 		print(weapon_ref.detect_hits())
-		body.queue_free() #Interim solution for testing. Replace with more robust damage/death system.
-		queue_free()
+		if body.has_method("take_damage"):
+			body.take_damage(weapon_ref.detect_hits())
 	else:
 		queue_free()
 

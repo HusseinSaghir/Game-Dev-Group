@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://betdhw34kcii1"]
 
-[ext_resource type="Texture2D" uid="uid://lywosvcvje6c" path="res://assets/art/weapons/ZenithTerraria.webp" id="1_5yyqi"]
 [ext_resource type="Script" uid="uid://dg5x1o755yhqx" path="res://scripts/items/weapon_items/weapon_sword_item.gd" id="1_83esy"]
 [ext_resource type="PackedScene" uid="uid://pxsgiedms586" path="res://scenes/weapons/weapon_sword.tscn" id="2_vc35m"]
+[ext_resource type="Texture2D" uid="uid://d3vhp07edec3p" path="res://assets/art/weapons/wpn_ironSword.png" id="3_a55q4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5yyqi"]
 radius = 4.0
@@ -13,9 +13,10 @@ script = ExtResource("1_83esy")
 type_weapon = ExtResource("2_vc35m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -0.7853982
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("1_5yyqi")
+position = Vector2(-2.3841858e-07, 1.1920929e-07)
+rotation = 4.834562
+scale = Vector2(0.8847699, 0.63844454)
+texture = ExtResource("3_a55q4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5yyqi")

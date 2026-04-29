@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://da58vkwgkcxha"]
+
+[ext_resource type="Script" uid="uid://ht47i8m1vwbv" path="res://scripts/items/feather.gd" id="1_0vfpe"]
+[ext_resource type="Texture2D" uid="uid://co0m6pneg2r3m" path="res://assets/art/items/feather.png" id="1_td55f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vfpe"]
+size = Vector2(10, 8)
+
+[node name="Feather" type="Area2D"]
+script = ExtResource("1_0vfpe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.37499997, 0.2578125)
+texture = ExtResource("1_td55f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0vfpe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

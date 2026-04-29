@@ -19,8 +19,13 @@ const WEAPON_SWORD = preload("res://scenes/items/weapon_items/weapon_sword_item.
 const WEAPON_SHORTBOW = preload("res://scenes/items/weapon_items/weapon_shortbow_item.tscn")
 const WEAPON_STAFF = preload("res://scenes/items/weapon_items/weapon_staff_item.tscn")
 const WEAPON_PISTOL = preload("res://scenes/items/weapon_items/weapon_pistol_item.tscn")
-const CRICKETS_HEAD = preload("res://scenes/items/cricketshead.tscn")
+const DAMAGE_GEM = preload("res://scenes/items/damage_gem.tscn")
+const CHEESE = preload("res://scenes/items/cheese.tscn")
+const FEATHER = preload("res://scenes/items/feather.tscn")
+const MEDBREW = preload("res://scenes/items/medbrew.tscn")
 const ENEMY_SCENE = preload("res://scenes/enemy/enemy.tscn")
+
+const PASSIVE_ITEMS = [DAMAGE_GEM, CHEESE, FEATHER, MEDBREW]
 
 # --- ENEMY SPAWNING TUNING (edit in Inspector) ---
 @export var enemy_count: int = 5
@@ -53,7 +58,9 @@ func _ready() -> void:
 	prop_layer.clear()
 	item_container.z_index = 10 
 	_place_player()
-	spawn_items()  
+	spawn_items()
+	generateRocks()  
+	spawn_troom_items()
 	current_map.exit_reached.connect(_on_exit_reached)
 	
 #---------------------------------------------------------------------------------------------------
@@ -84,12 +91,13 @@ func _next_floor() -> void:
 			child.queue_free()
 	#current_map.generate_sequence()            #Generate room type sequence.
 	#current_map.generate_dungeon(current_floor)#Generate new floor, pass current_floor number.
-	#_place_player()
-	#generateRocks()                            #Place player at new floor spawn point.
+	#_place_player()                            #Place player at new floor spawn point.
 	current_map.generate_sequence()
 	current_map.generate_dungeon(current_floor)
 	_place_player()
-	call_deferred("spawn_items")  # Defer spawning until after physics frame  
+	call_deferred("spawn_items")# Defer spawning until after physics frame
+	call_deferred("generateRocks")
+	call_deferred("spawn_troom_items")    
 
 #---------------------------------------------------------------------------------------------------
 #GENERATE ROCKS (Never called, hold for other props.)
@@ -124,28 +132,28 @@ func generateRocks() -> void:
 					
 		available_cells.shuffle()                                  #Shuffle available_cells to randomize.
 		
-		var numEnemies = (available_cells.size() * ENEMY_FILL_PERCENTAGE)
+		#var numEnemies = (available_cells.size() * ENEMY_FILL_PERCENTAGE)
 		var numCoins = (available_cells.size() * COIN_FILL_PERCENTAGE)  #NumRocks equivalent to 40% of
 																   #available cells.
-		for n in range(numEnemies):                                  #Place rocks.
-			var cell = available_cells.pop_front()
-			var entity = ENEMY_SCENE.instantiate()
+		#for n in range(numEnemies):                                  #Place rocks.
+			#var cell = available_cells.pop_front()
+			#var entity = ENEMY_SCENE.instantiate()
 		
 			#rock.data = room["room_type"].get_ore_data()           #Set rock data
 		
 			#var local_pos = ground_layer.map_to_local(cell)        #Get local position from tilemap.
 		
-			entity.position = ground_layer.map_to_local(cell)                              #Place rock, add to container.
-			container.add_child(entity)
+			#entity.position = ground_layer.map_to_local(cell)                              #Place rock, add to container.
+			#container.add_child(entity)
 			#entity.player = player
-			container.child_exiting_tree.connect(_check_room_clear.bind(i))
+			#container.child_exiting_tree.connect(_check_room_clear.bind(i))
 		
 		for n in range(numCoins):
 			var cell = available_cells.pop_front()
 			var coin = COIN_SCENE.instantiate()
 			
 			coin.position = ground_layer.map_to_local(cell)
-			add_child(coin)
+			item_container.add_child(coin)
 			
 func _check_room_clear(node: Node, room_index: int) -> void:
 	var room = current_map.get_rooms()[room_index]
@@ -183,8 +191,11 @@ func spawn_items() -> void:
 	_spawn_item(WEAPON_STAFF, spawn_positions, used_positions)
 	_spawn_item(WEAPON_PISTOL, spawn_positions, used_positions)
 	
-	# Spawn crickets head (1)
-	_spawn_item(CRICKETS_HEAD, spawn_positions, used_positions)
+	# Spawn crickets head (1) #Recommending commenting out so that passive items only spawn in treasure rooms. 
+	_spawn_item(DAMAGE_GEM, spawn_positions, used_positions)
+	_spawn_item(CHEESE, spawn_positions, used_positions)
+	_spawn_item(FEATHER, spawn_positions, used_positions)
+	_spawn_item(MEDBREW, spawn_positions, used_positions)
 	
 	# Spawn enemies
 	var enemy_positions: Array[Vector2] = []
@@ -275,3 +286,16 @@ func _spawn_enemy(available_positions: Array[Vector2], used_positions: Array[Vec
 	used_positions.append(spawn_pos)
 	enemy_positions.append(spawn_pos)
 	print_debug("[Level] Enemy spawned at ", spawn_pos, " (", candidates.size(), " candidates available)")
+
+#-------------------------------------------------------------------------------
+#SPAWN TREASURE ROOM LOOT
+#-------------------------------------------------------------------------------
+func spawn_troom_items() -> void:
+	var ground_layer: TileMapLayer = current_map.get_node("Ground")
+	for troom_origin in current_map.get_troom_origins():
+		var center_tile: Vector2i = troom_origin + Vector2i(2, 2)
+		var world_pos := ground_layer.map_to_local(center_tile)
+		var item_scene: PackedScene = PASSIVE_ITEMS[randi() % PASSIVE_ITEMS.size()]
+		var item = item_scene.instantiate()
+		item.global_position = world_pos
+		item_container.add_child(item)		

@@ -145,12 +145,24 @@ func play_idle_animation():
 #This function is called whenever a item is picked up that changes a damage value
 func change_damage(amount: int):
 	applied_damage += amount
-	real_damage += applied_damage
+	real_damage += amount
+
 
 #This function is called whenever a tiem is picked up that changes a speed value
 func change_speed(amount: int):
 	speed += amount
+
+
+#This function is called whenever a item is picked up that changes the max hp value
+func change_health(amount: int):
+	max_health += amount
 	
+
+#This function is called whenever a item is picked up that changes the max stam value
+func change_stam(amount: int):
+	max_stamina += amount
+	
+
 #This function is called whenever you change a weapon
 #It will set the real_damage to 0  then get the damage value of the weapon that was picked up
 #It will then add that and the applied_damage to real_damage

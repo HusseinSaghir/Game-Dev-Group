@@ -1,16 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://lamk0c623fdn"]
+[gd_scene load_steps=6 format=3 uid="uid://lamk0c623fdn"]
 
-[ext_resource type="Texture2D" uid="uid://p3fsr6j8nsye" path="res://assets/art/weapons/Basic Sword.png" id="1_jrmd0"]
 [ext_resource type="Script" uid="uid://521dweuvap5v" path="res://scripts/weapons/weapon_shortbow.gd" id="1_s1f67"]
+[ext_resource type="Texture2D" uid="uid://dbvwjmjb3f43g" path="res://assets/art/weapons/wpn_shortBow.png" id="2_s1f67"]
+
+[sub_resource type="Animation" id="Animation_oj6gg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j4yvi"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.23333333, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 0), Vector2(3, 0), Vector2(3, 0), Vector2(5, 0), Vector2(5, 0), Vector2(4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wrpm2"]
+_data = {
+&"RESET": SubResource("Animation_oj6gg"),
+&"attack": SubResource("Animation_j4yvi")
+}
 
 [node name="WeaponShortbow" type="Node2D"]
 script = ExtResource("1_s1f67")
 arc = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.5, 0)
-scale = Vector2(0.25595236, 0.25000003)
-texture = ExtResource("1_jrmd0")
+position = Vector2(4, 0)
+scale = Vector2(0.7708334, 0.47500002)
+texture = ExtResource("2_s1f67")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(5, 0)
+position = Vector2(8, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wrpm2")
+}
