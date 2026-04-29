@@ -266,11 +266,15 @@ func generate_troom_hall(troom_entrance_left: Vector2i, troom_entrance_right: Ve
 			_paint_room(troom_origin, 5, 5, false)
 			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_TOP_RIGHT_OUT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_RIGHT)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length + 1), FLOOR_SOURCE_ID, TILE_LEFT) #added line
+			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length + 1), FLOOR_SOURCE_ID, TILE_RIGHT) #added line
 		else:
 			troom_origin = Vector2i(x_left, entrance_y - troom_hall_length - 4)
 			_paint_room(troom_origin, 5, 5, false)
 			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_LEFT)
 			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length), FLOOR_SOURCE_ID, TILE_TOP_LEFT_OUT)
+			ground_layer.set_cell(Vector2i(x_left, entrance_y - troom_hall_length + 1), FLOOR_SOURCE_ID, TILE_LEFT) #added line
+			ground_layer.set_cell(Vector2i(x_right, entrance_y - troom_hall_length + 1), FLOOR_SOURCE_ID, TILE_RIGHT) #added line
 	else:
 		ground_layer.set_cell(troom_entrance_left, FLOOR_SOURCE_ID, TILE_TOP_RIGHT_OUT)
 		ground_layer.set_cell(troom_entrance_right, FLOOR_SOURCE_ID, TILE_TOP_LEFT_OUT)

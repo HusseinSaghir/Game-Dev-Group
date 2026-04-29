@@ -18,6 +18,7 @@ atlas = ExtResource("2_yms4u")
 region = Rect2(96, 400, 32, 48)
 
 [node name="TroomDoor" type="StaticBody2D"]
+z_index = 20
 script = ExtResource("1_vcpiu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

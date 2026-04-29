@@ -59,7 +59,7 @@ func _ready() -> void:
 	item_container.z_index = 10 
 	_place_player()
 	spawn_items()
-	generateRocks()  
+	#generateRocks()  
 	spawn_troom_items()
 	current_map.exit_reached.connect(_on_exit_reached)
 	
@@ -96,7 +96,7 @@ func _next_floor() -> void:
 	current_map.generate_dungeon(current_floor)
 	_place_player()
 	call_deferred("spawn_items")# Defer spawning until after physics frame
-	call_deferred("generateRocks")
+	#call_deferred("generateRocks")
 	call_deferred("spawn_troom_items")    
 
 #---------------------------------------------------------------------------------------------------
@@ -123,12 +123,7 @@ func generateRocks() -> void:
 		
 		var available_cells := []                                #cells, append to available_cells
 																   #if canSpawnRocks = true.
-		for x in range(room["origin"].x, room["origin"].x + room["width"]):
-			for y in range(room["origin"].y, room["origin"].y + room["height"]):
-				var cell := Vector2i(x, y)
-				var tile_data = ground_layer.get_cell_tile_data(cell)
-				if tile_data and tile_data.get_custom_data("canSpawnEnemies") == true:
-					available_cells.append(cell)
+		available_cells = _get_all_spawn_positions()
 					
 		available_cells.shuffle()                                  #Shuffle available_cells to randomize.
 		
@@ -197,6 +192,10 @@ func spawn_items() -> void:
 	_spawn_item(FEATHER, spawn_positions, used_positions)
 	_spawn_item(MEDBREW, spawn_positions, used_positions)
 	
+	var num_coins := (spawn_positions.size() * COIN_FILL_PERCENTAGE)
+	for i in range(num_coins):
+		_spawn_item(COIN_SCENE, spawn_positions, used_positions)
+	
 	# Spawn enemies
 	var enemy_positions: Array[Vector2] = []
 	print_debug("[Level] Spawning ", enemy_count, " enemies. Candidate pool: ", spawn_positions.size())
@@ -222,7 +221,7 @@ func _get_all_spawn_positions() -> Array[Vector2]:
 				var tile_data = ground_layer.get_cell_tile_data(cell)
 				
 				# Check if it's a walkable floor tile
-				if tile_data:
+				if tile_data and tile_data.get_custom_data("canSpawnEnemies") == true:
 					var local_pos = ground_layer.map_to_local(cell)
 					positions.append(local_pos)
 	

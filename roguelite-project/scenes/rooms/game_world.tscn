@@ -1,15 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://blppgvhnnp054"]
+[gd_scene load_steps=9 format=3 uid="uid://blppgvhnnp054"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
 [ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
 [ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
-[ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="6_jh4w7"]
 [ext_resource type="Script" uid="uid://b77hovyeipih8" path="res://scripts/game_world/room_generator.gd" id="6_rqyq"]
 [ext_resource type="Script" uid="uid://cjpkhbubdlgu" path="res://scripts/game_world/level.gd" id="7_d04yv"]
 [ext_resource type="AudioStream" uid="uid://doxrys7o0llax" path="res://assets/audio/sfx/sm64-mario-pain.ogg" id="7_pv02e"]
 [ext_resource type="PackedScene" uid="uid://4x4qpc4k7elb" path="res://scenes/rooms/floor.tscn" id="8_j8x4i"]
 [ext_resource type="PackedScene" uid="uid://c80d6ypkl56i8" path="res://scenes/ui/player_hud.tscn" id="12_86f4y"]
-[ext_resource type="PackedScene" uid="uid://13t38se3orbd" path="res://scenes/items/pickups/pickup_key.tscn" id="13_pickup_key"]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("7_d04yv")
@@ -36,14 +34,7 @@ visible = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_pv02e")
 
-[node name="pickup_key" parent="." instance=ExtResource("13_pickup_key")]
-position = Vector2(466, 193)
-
 [node name="enemy_container" type="Node2D" parent="."]
-
-[node name="Enemy" parent="enemy_container" node_paths=PackedStringArray("player") instance=ExtResource("6_jh4w7")]
-position = Vector2(813, 315)
-player = NodePath("../../Player")
 
 [node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_86f4y")]
 player = NodePath("../Player")
