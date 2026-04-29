@@ -18,7 +18,10 @@ const WEAPON_SWORD = preload("res://scenes/items/weapon_items/weapon_sword_item.
 const WEAPON_SHORTBOW = preload("res://scenes/items/weapon_items/weapon_shortbow_item.tscn")
 const WEAPON_STAFF = preload("res://scenes/items/weapon_items/weapon_staff_item.tscn")
 const WEAPON_PISTOL = preload("res://scenes/items/weapon_items/weapon_pistol_item.tscn")
-const CRICKETS_HEAD = preload("res://scenes/items/cricketshead.tscn")
+const DAMAGE_GEM = preload("res://scenes/items/damage_gem.tscn")
+const CHEESE = preload("res://scenes/items/cheese.tscn")
+const FEATHER = preload("res://scenes/items/feather.tscn")
+const MEDBREW = preload("res://scenes/items/medbrew.tscn")
 const ENEMY_SCENE = preload("res://scenes/enemy/enemy.tscn")
 
 # --- ENEMY SPAWNING TUNING (edit in Inspector) ---
@@ -137,7 +140,10 @@ func spawn_items() -> void:
 	_spawn_item(WEAPON_PISTOL, spawn_positions, used_positions)
 	
 	# Spawn crickets head (1)
-	_spawn_item(CRICKETS_HEAD, spawn_positions, used_positions)
+	_spawn_item(DAMAGE_GEM, spawn_positions, used_positions)
+	_spawn_item(CHEESE, spawn_positions, used_positions)
+	_spawn_item(FEATHER, spawn_positions, used_positions)
+	_spawn_item(MEDBREW, spawn_positions, used_positions)
 	
 	# Spawn enemies
 	var enemy_positions: Array[Vector2] = []

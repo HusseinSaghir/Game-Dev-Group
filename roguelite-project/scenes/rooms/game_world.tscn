@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bqyi45alyvy4l"]
 
 [ext_resource type="PackedScene" uid="uid://dgkk3e2lkjt30" path="res://scenes/player/player.tscn" id="1_0aysy"]
+[ext_resource type="PackedScene" uid="uid://betdhw34kcii1" path="res://scenes/items/weapon_items/weapon_sword_item.tscn" id="2_6rqyq"]
 [ext_resource type="PackedScene" uid="uid://c1j43y6t82tr" path="res://scenes/hud/pickup_display.tscn" id="2_s1315"]
 [ext_resource type="PackedScene" uid="uid://bgix1poil4vav" path="res://scenes/ui/pause_menu.tscn" id="5_s1315"]
 [ext_resource type="Script" uid="uid://b77hovyeipih8" path="res://scripts/game_world/room_generator.gd" id="6_rqyq"]

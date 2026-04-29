@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://rka1yl11vy67" path="res://scenes/items/weapon_items/weapon_staff_item.tscn" id="5_33rt3"]
 [ext_resource type="PackedScene" uid="uid://ol2g8yox5qon" path="res://scenes/items/weapon_items/weapon_pistol_item.tscn" id="6_3ntna"]
 [ext_resource type="PackedScene" uid="uid://cilr5gqjv26s0" path="res://scenes/items/pickups/pickup_coin.tscn" id="7_1yvp6"]
-[ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/cricketshead.tscn" id="8_3ntna"]
+[ext_resource type="PackedScene" uid="uid://dd2d0m0vo4omo" path="res://scenes/items/damage_gem.tscn" id="8_3ntna"]
 [ext_resource type="PackedScene" uid="uid://13t38se3orbd" path="res://scenes/items/pickups/pickup_key.tscn" id="9_t4rt3"]
 [ext_resource type="PackedScene" uid="uid://butyqs8yu7k1n" path="res://scenes/items/slotMachine/slots.tscn" id="10_t4rt3"]
 [ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="11_qx2u2"]
@@ -38,6 +38,12 @@ position = Vector2(674, 308)
 
 [node name="Pickup_Coin" parent="." instance=ExtResource("7_1yvp6")]
 position = Vector2(586, 319)
+
+[node name="Pickup_Coin3" parent="." instance=ExtResource("7_1yvp6")]
+position = Vector2(574, 320)
+
+[node name="Pickup_Coin2" parent="." instance=ExtResource("7_1yvp6")]
+position = Vector2(556, 318)
 
 [node name="Cricketshead" parent="." instance=ExtResource("8_3ntna")]
 position = Vector2(516, 301)

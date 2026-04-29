@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://pxsgiedms586"]
 
 [ext_resource type="Script" uid="uid://dcsanwflq1jos" path="res://scripts/weapons/weapon_sword.gd" id="1_ruf80"]
-[ext_resource type="Texture2D" uid="uid://lywosvcvje6c" path="res://assets/art/weapons/ZenithTerraria.webp" id="2_ruf80"]
+[ext_resource type="Texture2D" uid="uid://lywosvcvje6c" path="res://assets/art/weapons/ZenithTerraria.webp" id="3_ruf80"]
+[ext_resource type="Texture2D" uid="uid://d3vhp07edec3p" path="res://assets/art/weapons/wpn_ironSword.png" id="2_ruf80"]
 
 [sub_resource type="Animation" id="Animation_vk8bs"]
 length = 0.001
@@ -15,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(6.999999, 0.9999998)]
+"values": [Vector2(35.000004, 5)]
 }
 
 [sub_resource type="Animation" id="Animation_rp6nc"]
@@ -28,10 +29,10 @@ tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.16241641, 0.23333333, 0.3, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.14870155, 0.2, 0.26666668, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8, 1.0000002), Vector2(6.999999, 0.9999998), Vector2(6.999999, 0.9999998), Vector2(12, 1), Vector2(12, 1), Vector2(8, 1.0000002)]
+"values": [Vector2(50, 5), Vector2(30.000004, 5), Vector2(30.000004, 5), Vector2(70, 5), Vector2(70, 5), Vector2(50, 5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ev64"]
@@ -45,13 +46,12 @@ scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ruf80")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(6.999999, 0.9999998)
-rotation = 0.7853982
-scale = Vector2(0.2, 0.2)
+position = Vector2(35.000004, 5)
+scale = Vector2(4.74375, 2.9250886)
 texture = ExtResource("2_ruf80")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(19, 1)
+position = Vector2(120, 5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

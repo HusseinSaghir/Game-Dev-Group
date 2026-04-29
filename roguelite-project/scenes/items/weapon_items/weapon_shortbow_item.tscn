@@ -2,20 +2,21 @@
 
 [ext_resource type="Script" uid="uid://daqv0o1p5o8g" path="res://scripts/items/weapon_items/weapon_shortbow_item.gd" id="1_n34uy"]
 [ext_resource type="PackedScene" uid="uid://lamk0c623fdn" path="res://scenes/weapons/weapon_shortbow.tscn" id="2_mylj7"]
-[ext_resource type="Texture2D" uid="uid://p3fsr6j8nsye" path="res://assets/art/weapons/Basic Sword.png" id="3_clb1a"]
+[ext_resource type="Texture2D" uid="uid://dbvwjmjb3f43g" path="res://assets/art/weapons/wpn_shortBow.png" id="3_n34uy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n34uy"]
-radius = 3.0
-height = 12.0
+radius = 7.0
+height = 18.0
 
 [node name="WeaponShortbowItem" type="Area2D"]
 script = ExtResource("1_n34uy")
 type_weapon = ExtResource("2_mylj7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -1.5707964
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_clb1a")
+position = Vector2(2.3841858e-07, 1.1920929e-07)
+rotation = -0.4886922
+scale = Vector2(1.0361364, 0.76823425)
+texture = ExtResource("3_n34uy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n34uy")
