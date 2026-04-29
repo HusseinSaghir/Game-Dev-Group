@@ -15,4 +15,12 @@ func _process (_delta : float):
 		current_weapon.set_aim_direction(mouse_dir)
 		
 		if Input.is_action_just_pressed("attack"):
-			current_weapon._try_use()
+			# Added to this code to drain stamina when using weapon
+			var player = owner
+			if player.current_stamina >= player.stamina_cost:
+				player.current_stamina -= player.stamina_cost
+				
+				if player.player_hud:
+					player.player_hud.set_stamina(player.current_stamina)
+					
+				current_weapon._try_use()
