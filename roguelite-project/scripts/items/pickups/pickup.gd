@@ -43,6 +43,7 @@ func _on_body_entered(body : Node2D) -> void:
 		ItemType.KEY:
 			AudioManager.play_sfx(key_sfx)
 			played = true
+			
 
 	if not played:
 		match equip_type:
@@ -50,6 +51,8 @@ func _on_body_entered(body : Node2D) -> void:
 				AudioManager.play_sfx(weapon_equipSFX)
 			EquipType.CRICKET:
 				AudioManager.play_sfx(item_equipSFX)
+	#else:
+		#AudioManager.play_sfx(weapon_equipSFX)
 		
 	var inventory = body.find_child("Inventory")
 	if(inventory):
