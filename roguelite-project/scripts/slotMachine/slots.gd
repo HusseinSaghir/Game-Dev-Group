@@ -16,10 +16,10 @@ var is_spinning: bool = false
 # Reward weights (you can adjust these percentages)
 enum Reward { LOSE, WIN_1_COIN, WIN_3_COINS, WIN_KEY }
 var reward_weights = {
-	Reward.LOSE: 50,        # 50% chance to lose
-	Reward.WIN_1_COIN: 25,  # 25% chance for 1 coin
-	Reward.WIN_3_COINS: 15, # 15% chance for 3 coins
-	Reward.WIN_KEY: 10      # 10% chance for key
+	Reward.LOSE: 25,        # 25% chance to lose
+	Reward.WIN_1_COIN: 10,  # 15% chance for 1 coin
+	Reward.WIN_3_COINS: 25, # 10% chance for 3 coins
+	Reward.WIN_KEY: 40      # 25% chance for key
 }
 
 func _ready():

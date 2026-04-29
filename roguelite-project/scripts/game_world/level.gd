@@ -4,7 +4,7 @@ extends Node2D
 #CONSTANTS FOR PROP GENERATION AND FLOOR GENERATION
 #---------------------------------------------------------------------------------------------------
 const ENEMY_FILL_PERCENTAGE: float = 0.05
-const COIN_FILL_PERCENTAGE: float = 0.1
+const COIN_FILL_PERCENTAGE: float = 0.05
 const KEY_SCENE = preload("res://scenes/items/pickups/pickup_key.tscn")
 const TEST_WEAPON_SCENE = preload("res://scenes/items/weapon_items/weapon_pistol_item.tscn")
 const COIN_SCENE = preload("res://scenes/items/pickups/pickup_coin.tscn")
