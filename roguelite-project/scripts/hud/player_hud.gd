@@ -17,9 +17,11 @@ func _ready() -> void:
 	inventory_slots = [
 		get_node("RootControl/Inventory/Slot1/Icon"), 
 		get_node("RootControl/Inventory/Slot2/Icon"), 
-		get_node("RootControl/Inventory/Slot3/Icon")
+		get_node("RootControl/Inventory/Slot3/Icon"),
+		get_node("RootControl/Inventory/Slot4/Icon")
 	]
 	
+	add_to_group("HUD")
 		
 	# --- SYNC 
 	if player:

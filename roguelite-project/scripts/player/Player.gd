@@ -58,9 +58,6 @@ func _ready():
 
 
 func _physics_process(_delta):
-	# DAMAGE DEBUG
-	if Input.is_action_just_pressed("ui_accept"):
-		take_damage(10)
 		 # DEBUG - Check if input is working
 		 # Godot has built in preset commands but I did these myself
 		 # To do so go to Project -> Project Settings -> Input mapping
@@ -155,13 +152,20 @@ func change_speed(amount: int):
 
 #This function is called whenever a item is picked up that changes the max hp value
 func change_health(amount: int):
-	max_health += amount
+	current_health += amount
+	current_health = clamp(current_health, 0, max_health)
+	
+	if player_hud:
+		player_hud.set_health(current_health)
 	
 
 #This function is called whenever a item is picked up that changes the max stam value
 func change_stam(amount: int):
-	max_stamina += amount
+	current_stamina += amount
+	current_stamina = clamp(current_stamina, 0, max_stamina)
 	
+	if player_hud:
+		player_hud.set_stamina(current_stamina)
 
 #This function is called whenever you change a weapon
 #It will set the real_damage to 0  then get the damage value of the weapon that was picked up
