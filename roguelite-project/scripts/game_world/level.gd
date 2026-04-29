@@ -20,6 +20,11 @@ const WEAPON_STAFF = preload("res://scenes/items/weapon_items/weapon_staff_item.
 const WEAPON_PISTOL = preload("res://scenes/items/weapon_items/weapon_pistol_item.tscn")
 const CRICKETS_HEAD = preload("res://scenes/items/cricketshead.tscn")
 const ENEMY_SCENE = preload("res://scenes/enemy/enemy.tscn")
+
+# --- ENEMY SPAWNING TUNING (edit in Inspector) ---
+@export var enemy_count: int = 5
+@export var min_enemy_distance_from_player: float = 150.0
+@export var min_enemy_spacing: float = 120.0
 #---------------------------------------------------------------------------------------------------
 #NODE REFERENCES
 #---------------------------------------------------------------------------------------------------
@@ -134,9 +139,12 @@ func spawn_items() -> void:
 	# Spawn crickets head (1)
 	_spawn_item(CRICKETS_HEAD, spawn_positions, used_positions)
 	
-	# Spawn enemies (2) - far from player
-	_spawn_enemy(spawn_positions, used_positions)
-	_spawn_enemy(spawn_positions, used_positions)
+	# Spawn enemies
+	var enemy_positions: Array[Vector2] = []
+	print_debug("[Level] Spawning ", enemy_count, " enemies. Candidate pool: ", spawn_positions.size())
+	for i in range(enemy_count):
+		_spawn_enemy(spawn_positions, used_positions, enemy_positions)
+
 
 func _get_all_spawn_positions() -> Array[Vector2]:
 	var positions: Array[Vector2] = []
@@ -162,6 +170,8 @@ func _get_all_spawn_positions() -> Array[Vector2]:
 	
 	return positions
 
+
+
 func _spawn_item(item_scene: PackedScene, available_positions: Array[Vector2], used_positions: Array[Vector2]) -> void:
 	if available_positions.size() == 0:
 		print("No available positions!")
@@ -182,30 +192,39 @@ func _spawn_item(item_scene: PackedScene, available_positions: Array[Vector2], u
 	item_container.add_child(item)
 	used_positions.append(spawn_pos)
 
-func _spawn_enemy(available_positions: Array[Vector2], used_positions: Array[Vector2]) -> void:
+func _spawn_enemy(available_positions: Array[Vector2], used_positions: Array[Vector2], enemy_positions: Array[Vector2]) -> void:
 	if available_positions.size() == 0:
-		print("No available positions for enemy!")
+		print_debug("[Level] No available positions for enemy!")
 		return
-	
-	# Find position far from player
+
 	var player_pos = player.global_position
-	var best_pos: Vector2
-	var max_distance = 0.0
-	
-	# Check 20 random positions and pick the farthest from player
-	for i in range(20):
-		var test_pos = available_positions.pick_random()
-		if used_positions.has(test_pos):
+
+	# Build a filtered candidate list: not too close to player, not too close to other enemies
+	var candidates: Array[Vector2] = []
+	for pos in available_positions:
+		if used_positions.has(pos):
 			continue
-		
-		var distance = player_pos.distance_to(test_pos)
-		if distance > max_distance:
-			max_distance = distance
-			best_pos = test_pos
-	
-	# Spawn enemy
+		if pos.distance_to(player_pos) < min_enemy_distance_from_player:
+			continue
+		var too_close_to_enemy := false
+		for ep in enemy_positions:
+			if pos.distance_to(ep) < min_enemy_spacing:
+				too_close_to_enemy = true
+				break
+		if not too_close_to_enemy:
+			candidates.append(pos)
+
+	if candidates.size() == 0:
+		print_debug("[Level] No valid spread position found for enemy — skipping")
+		return
+
+	# Pick randomly from valid candidates instead of always grabbing the farthest
+	var spawn_pos: Vector2 = candidates.pick_random()
+
 	var enemy = ENEMY_SCENE.instantiate()
-	enemy.global_position = best_pos
-	enemy.player = player  # Set player reference automatically
+	enemy.global_position = spawn_pos
+	enemy.player = player
 	item_container.add_child(enemy)
-	used_positions.append(best_pos)
+	used_positions.append(spawn_pos)
+	enemy_positions.append(spawn_pos)
+	print_debug("[Level] Enemy spawned at ", spawn_pos, " (", candidates.size(), " candidates available)")
