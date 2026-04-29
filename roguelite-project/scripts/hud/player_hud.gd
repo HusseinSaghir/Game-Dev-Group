@@ -36,6 +36,15 @@ func _process(delta: float) -> void:
 func set_health(value: float):
 	if hp_bar:
 		hp_bar.value = value
+
+func on_damage_taken(value: float):
+	if not hp_bar:
+		return
+	print_debug("[HUD] Health bar animating to: ", value)
+	var tween = create_tween()
+	tween.tween_property(hp_bar, "value", value, 0.3).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(hp_bar, "modulate", Color(1.0, 0.15, 0.15), 0.05)
+	tween.tween_property(hp_bar, "modulate", Color.WHITE, 0.25)
 	
 func set_stamina(value: float):
 	if stamina_bar:	

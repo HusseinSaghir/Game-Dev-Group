@@ -16,9 +16,11 @@ func _process(delta: float) -> void:
 
 # Play a test audio on collision
 func _on_body_entered(body: Node2D) -> void:
-	print("Collided with: ", body.name)
-	if body.is_in_group("Enemy") and !get_parent().iframes:
+	if body is Enemy and !get_parent().iframes:
+		print_debug("[HitDetector] Hit by Enemy '", body.name, "' for ", body.damage, " dmg")
 		audio.play()
-		get_parent().take_damage(body.damage) # this to take damage if collide with enemy 
+		get_parent().take_damage(body.damage)
 		if get_parent().has_method("trigger_iframes"):
 			get_parent().trigger_iframes()
+	else:
+		print_debug("[HitDetector] Body entered (ignored): ", body.name)

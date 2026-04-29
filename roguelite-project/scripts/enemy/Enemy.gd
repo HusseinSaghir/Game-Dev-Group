@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Enemy
 #Below we have Godot spevific annotations which we will be seeing often
 #@export makes a variable editable within the godot inspector on the right -> 
 #Great tool for debugging and testing fast!
@@ -17,8 +18,10 @@ extends CharacterBody2D
 # This is a copy of the Player class, but with the movement handled to automatically move toward 
 # the player instead of being based on inputs.
 
+
 #Movement variables
 @export var speed: float = 50.0
+@export var damage: float = 10.0
 
 # Animation node reference
 @onready var animated_sprite = $AnimatedSprite2D
@@ -33,6 +36,8 @@ var last_direction: Vector2 = Vector2.DOWN
 func _ready():
 	#Play initial idle animation
 	animated_sprite.play("idle_down")
+	add_to_group("Enemy")   # Required for hitdetector group check
+	print_debug("[Enemy] Spawned. Damage: ", damage, " Speed: ", speed)
 
 
 func _physics_process(delta):
