@@ -43,12 +43,21 @@ var last_direction: Vector2 = Vector2.DOWN
 # --- HEALTH ---
 var max_health := 100 
 var current_health := 100 
+var is_hurt: bool = false
+
 
 # --- STAMINA ---
 var current_stamina := 100.0
 var max_stamina := 100.0
 var stamina_cost := 10.0
 var stamina_regen := 20.0
+
+# --- DIRECTION ---
+#var direction: Vector2
+#var face_right = direction.x > 0
+#var face_down = direction.y > 0
+#var face_left = direction.x < 0
+#var face_up = direction.y < 0
 
 func _ready():
 	#Play initial idle animation
@@ -100,6 +109,8 @@ func _physics_process(_delta):
 
 
 func update_animation(direction: Vector2):
+	if is_hurt:
+		return
 	if direction.length() == 0:
 		# Idle - uses last direction
 		play_idle_animation()
@@ -138,6 +149,23 @@ func play_idle_animation():
 			animated_sprite.play("idle_down")
 		else:
 			animated_sprite.play("idle_up")
+			
+			
+func play_hit_animation(direction: Vector2):
+	#Determines our primary direction 
+	#We set it to prioritize horizontal over vertical diagonals
+	if abs(direction.x) > abs(direction.y):
+		# Moving horizontally
+		if direction.x > 0:
+			animated_sprite.play("hit_right")
+		else:
+			animated_sprite.play("hit_left")
+	else:
+		# Moving vertically
+		if direction.y > 0:
+			animated_sprite.play("hit_down")
+		else:
+			animated_sprite.play("hit_up")
 
 #This function is called whenever a item is picked up that changes a damage value
 func change_damage(amount: int):
@@ -203,15 +231,28 @@ func take_damage(amount: float):
 	
 	print_debug("[Player] Took ", amount, " damage → Health: ", current_health, "/", max_health)
 	
-	var tween = create_tween()
-	tween.tween_property(animated_sprite, "modulate", Color(1.0, 0.2, 0.2), 0.05)
-	tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.15)
+	# Sen - Omitting these lines to implement hurt animations <3
+	#var tween = create_tween()
+	#tween.tween_property(animated_sprite, "modulate", Color(1.0, 0.2, 0.2), 0.05)
+	#tween.tween_property(animated_sprite, "modulate", Color.WHITE, 0.15)
+	
 	
 	if player_hud:
 		player_hud.on_damage_taken(current_health)
 	
 	if current_health <= 0:
 		die()
+
+
+	# choose direction: prefer current velocity, fall back to last_direction
+	is_hurt = true 
+	var dir =  velocity.normalized() if velocity.length() > 0.1 else last_direction
+	play_hit_animation(dir)
+
+	# end hurt after short time so normal animation resumes
+	await get_tree().create_timer(0.35).timeout
+	is_hurt = false
+	
 		
 # --- ATTACK (STAMINA USAGE) ---
 func use_stamina_for_attack():

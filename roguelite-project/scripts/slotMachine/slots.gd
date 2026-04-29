@@ -13,6 +13,12 @@ const KEY_PICKUP = preload("res://scenes/items/pickups/pickup_key.tscn")
 # State management
 var is_spinning: bool = false
 
+var insertCoinFX = load("res://assets/audio/sfx/slotFX/insertCoin.wav")
+var spinFX = load("res://assets/audio/sfx/slotFX/spinFX.wav")
+var winFX = load("res://assets/audio/sfx/slotFX/winFX.wav")
+var loseFX = load("res://assets/audio/sfx/slotFX/loseFX.wav")
+
+
 # Reward weights (you can adjust these percentages)
 enum Reward { LOSE, WIN_1_COIN, WIN_3_COINS, WIN_KEY }
 var reward_weights = {
@@ -23,6 +29,7 @@ var reward_weights = {
 }
 
 func _ready():
+
 	# Connect detection area signal
 	if detector:
 		detector.body_entered.connect(_on_body_entered)
@@ -30,6 +37,11 @@ func _ready():
 	# Start with idle animation
 	if animated_sprite:
 		animated_sprite.play("idle")
+
+func _on_first_sfx_finished():
+	var audio_manager = get_node("/root/AudioManager")
+	audio_manager.play_sfx_secondary()  # call a method on AudioManager to play the second SFX
+
 
 func _on_body_entered(body: Node2D):
 	# Auto-activate when player touches (only if not already spinning)
@@ -49,6 +61,8 @@ func attempt_spin(player_body: Node2D):
 	if result == "passed":
 		# Successfully took coin - start spinning!
 		start_spin()
+		AudioManager.play_sfx_chain(insertCoinFX, spinFX)
+
 	else:
 		print("Not enough coins!")
 		# Optional: play "not enough coins" sound or animation
@@ -71,10 +85,12 @@ func start_spin():
 	if reward == Reward.LOSE:
 		if animated_sprite:
 			animated_sprite.play("lose")
+		AudioManager.play_sfx(loseFX)
 		print("You lost!")
 	else:
 		if animated_sprite:
 			animated_sprite.play("win")
+		AudioManager.play_sfx(winFX)
 	await get_tree().create_timer(1.5).timeout  # Wait 1.5 seconds
 	spawn_reward(reward)
 	

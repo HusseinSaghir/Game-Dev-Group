@@ -9,6 +9,7 @@ var owner_character : CharacterBody2D
 var can_use : bool = true
 
 
+
 #Used for rotating our weapons
 #Gets Called every frame
 func _process (delta: float):
@@ -24,6 +25,8 @@ func set_aim_direction (aim_dir : Vector2):
 #Will be used for sound effects if we wanted them
 func _equip ():
 	owner_character.change_weapon_damage(weapon_damage())
+
+
 	
 
 func _unequip():

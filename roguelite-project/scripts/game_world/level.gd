@@ -41,6 +41,7 @@ const PASSIVE_ITEMS = [DAMAGE_GEM, CHEESE, FEATHER, MEDBREW]
 
 #Tracks current floor.
 var current_floor := 1
+var bgm = load("res://assets/audio/music/blossom.wav")
 
 #---------------------------------------------------------------------------------------------------
 #READY FUNCTION
@@ -57,6 +58,7 @@ func _ready() -> void:
 	var prop_layer: TileMapLayer = current_map.get_node("Props")
 	prop_layer.clear()
 	item_container.z_index = 10 
+	AudioManager.play_music(bgm)
 	_place_player()
 	spawn_items()
 	#generateRocks()  
