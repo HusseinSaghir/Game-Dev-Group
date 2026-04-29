@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://butyqs8yu7k1n" path="res://scenes/items/slotMachine/slots.tscn" id="10_t4rt3"]
 [ext_resource type="PackedScene" uid="uid://dd8ers5y7vk4h" path="res://scenes/enemy/enemy.tscn" id="11_qx2u2"]
 
-[node name="GameWorld" type="Node2D"]
+[node name="GameWorld2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0aysy")]
 position = Vector2(578, 314)

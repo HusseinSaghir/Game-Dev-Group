@@ -3,6 +3,8 @@ extends Area2D
 #Script for checking if the enemy hits the hitbox
 @onready var audio = $"../../AudioStreamPlayer2D"
 
+const HIT_SOUND = preload("res://assets/audio/sfx/sm64-mario-pain.ogg")
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +20,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Enemy and !get_parent().iframes:
 		print_debug("[HitDetector] Hit by Enemy '", body.name, "' for ", body.damage, " dmg")
-		audio.play()
+		AudioManager.play_sfx(HIT_SOUND)
 		get_parent().take_damage(body.damage)
 		if get_parent().has_method("trigger_iframes"):
 			get_parent().trigger_iframes()
