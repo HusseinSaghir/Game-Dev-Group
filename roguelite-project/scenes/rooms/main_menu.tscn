@@ -92,7 +92,7 @@ theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_ws7n6")
 theme_override_font_sizes/font_size = 48
-text = "LABYRITH OF THE DAMNED!"
+text = "The Best Game In The World!"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
@@ -213,6 +213,7 @@ libraries = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
