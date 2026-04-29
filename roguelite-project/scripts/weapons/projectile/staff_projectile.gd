@@ -19,6 +19,8 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.is_in_group("Enemy"):
 		print(weapon_ref.detect_hits())
+		if body.has_method("take_damage"):
+			body.take_damage(weapon_ref.detect_hits())
 		pierce_count = pierce_count - 1
 		if(pierce_count == 0):
 			queue_free()

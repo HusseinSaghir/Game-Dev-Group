@@ -23,6 +23,10 @@ class_name Enemy
 @export var speed: float = 50.0
 @export var damage: float = 10.0
 
+# Health vars
+var max_health := 60
+var current_health := 60
+
 # Animation node reference
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -97,3 +101,19 @@ func play_idle_animation():
 			animated_sprite.play("idle_down")
 		else:
 			animated_sprite.play("idle_up")
+			
+func take_damage(amount: float):
+	current_health -= amount
+	current_health = clamp(current_health, 0, max_health)
+	
+	if(current_health <= 0):
+		die()
+	
+	animated_sprite.visible = false
+	await get_tree().create_timer(0.05).timeout
+	animated_sprite.visible = true
+
+
+func die():
+	#In theory this method deletes the node
+	queue_free()
