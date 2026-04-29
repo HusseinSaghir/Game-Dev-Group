@@ -25,6 +25,7 @@ func _ready():
 # Start Game button clicked
 func _on_start_pressed():
 	GameManager.goto_game()
+	AudioManager.stop_music()
 
 # Settings button clicked
 func _on_settings_pressed():

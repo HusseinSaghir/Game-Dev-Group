@@ -25,16 +25,16 @@ zoom = Vector2(3, 3)
 
 [node name="PickupDisplay" parent="CanvasLayer" instance=ExtResource("2_s1315")]
 
-[node name="WeaponShortbowItem" parent="." groups=["Player"] instance=ExtResource("3_3mjdk")]
+[node name="WeaponShortbowItem" parent="." instance=ExtResource("3_3mjdk")]
 position = Vector2(639, 263)
 
-[node name="MeleeWeaponItem" parent="." groups=["Player"] instance=ExtResource("4_1yvp6")]
+[node name="MeleeWeaponItem" parent="." instance=ExtResource("4_1yvp6")]
 position = Vector2(656, 282)
 
-[node name="WeaponStaffItem" parent="." groups=["Player"] instance=ExtResource("5_33rt3")]
+[node name="WeaponStaffItem" parent="." instance=ExtResource("5_33rt3")]
 position = Vector2(668, 261)
 
-[node name="WeaponPistolItem" parent="." groups=["Player"] instance=ExtResource("6_3ntna")]
+[node name="WeaponPistolItem" parent="." instance=ExtResource("6_3ntna")]
 position = Vector2(674, 308)
 
 [node name="Pickup_Coin" parent="." instance=ExtResource("7_1yvp6")]
@@ -46,7 +46,7 @@ position = Vector2(574, 320)
 [node name="Pickup_Coin2" parent="." instance=ExtResource("7_1yvp6")]
 position = Vector2(556, 318)
 
-[node name="damageGem" parent="." groups=["Player"] instance=ExtResource("8_3ntna")]
+[node name="Cricketshead" parent="." instance=ExtResource("8_3ntna")]
 position = Vector2(516, 301)
 
 [node name="pickup_key" parent="." instance=ExtResource("9_t4rt3")]

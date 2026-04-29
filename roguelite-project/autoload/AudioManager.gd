@@ -11,6 +11,7 @@ var sfx_volume: float = 0.8
 # Audio players - we'll create these in _ready()
 var music_player: AudioStreamPlayer
 var sfx_player: AudioStreamPlayer
+var _next_sfx: AudioStream = null
 func _ready():
 	# Create audio players
 	music_player = AudioStreamPlayer.new()
@@ -42,7 +43,6 @@ func load_audio_settings():
 		print("No config file, using defaults") #DEBUG LINE
 	
 	
-	
 	# Apply loaded volumes
 	set_music_volume(music_volume)
 	set_sfx_volume(sfx_volume)
@@ -61,6 +61,30 @@ func stop_music():
 func play_sfx(stream: AudioStream):
 	sfx_player.stream = stream
 	sfx_player.play()
+	
+
+# Detect AudioStreamPlayer's finished() signal for use in other scripts
+func _on_AudioStreamPlayer_finished():
+	print("Audio has finished playing.")
+	
+func _on_sfx_finished():
+	if _next_sfx:
+		sfx_player.stream = _next_sfx
+		sfx_player.play()
+		_next_sfx = null
+
+
+func play_sfx_chain(a_stream: AudioStream, b_stream: AudioStream) -> void:
+	sfx_player.stream = a_stream
+	sfx_player.play()
+	var cb = Callable(self, "_on_sfx_finished")
+	# disconnect previous to avoid duplicates
+	if sfx_player.is_connected("finished", cb):
+		sfx_player.disconnect("finished", cb)
+	sfx_player.connect("finished", cb)
+	_next_sfx = b_stream
+
+
 
 # Set music volume (0.0 to 1.0)
 func set_music_volume(value: float):
@@ -84,3 +108,5 @@ func save_audio_settings():
 	config.set_value("audio", "sfx_volume", sfx_volume)
 	config.save("user://audio_settings.cfg")
 	print("Saved - Music: ", music_volume, " SFX: ", sfx_volume) #DEBUG LINE
+	
+	

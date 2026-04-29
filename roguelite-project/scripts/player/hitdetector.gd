@@ -3,7 +3,7 @@ extends Area2D
 #Script for checking if the enemy hits the hitbox
 @onready var audio = $"../../AudioStreamPlayer2D"
 
-const HIT_SOUND = preload("res://assets/audio/sfx/sm64-mario-pain.ogg")
+const HIT_SOUND = preload("res://assets/audio/sfx/bonk-4.wav")
 
 
 

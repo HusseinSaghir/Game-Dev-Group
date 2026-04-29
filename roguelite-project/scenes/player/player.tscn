@@ -1,17 +1,85 @@
-[gd_scene load_steps=88 format=3 uid="uid://dgkk3e2lkjt30"]
+[gd_scene load_steps=108 format=3 uid="uid://dgkk3e2lkjt30"]
 
 [ext_resource type="Script" uid="uid://dfo4nkmjeqolq" path="res://scripts/player/Player.gd" id="1_abrql"]
 [ext_resource type="Texture2D" uid="uid://cdsboksev1g7x" path="res://assets/art/characters/Front animations/spr_player_front_idle.png" id="2_fm80t"]
+[ext_resource type="Texture2D" uid="uid://bvqy0s4loqoo8" path="res://assets/art/characters/Front animations/spr_player_front_hit.png" id="2_gx1jg"]
 [ext_resource type="Script" uid="uid://b5hieoonh26cf" path="res://scripts/player/hitdetector.gd" id="2_lvxji"]
 [ext_resource type="Texture2D" uid="uid://cpcheuflt02g4" path="res://assets/art/characters/Side animations/spr_player_left_idle.png" id="3_gx1jg"]
 [ext_resource type="Script" uid="uid://c8y6chk1fjlav" path="res://scripts/weapons/weapon_structure/player_weapons.gd" id="3_lvxji"]
+[ext_resource type="Texture2D" uid="uid://dur5t8dk1uoig" path="res://assets/art/characters/Side animations/spr_player_left_hit.png" id="3_myrg7"]
+[ext_resource type="Texture2D" uid="uid://maee1jahryyc" path="res://assets/art/characters/Side animations/spr_player_right_hit.png" id="4_kvlxm"]
 [ext_resource type="Script" uid="uid://dnw6scfml340o" path="res://scripts/player/Inventory.gd" id="4_lvxji"]
 [ext_resource type="Texture2D" uid="uid://c63fnx55wxku8" path="res://assets/art/characters/Side animations/spr_player_right_idle.png" id="4_ugbui"]
 [ext_resource type="Texture2D" uid="uid://x0k0xrjqqm0l" path="res://assets/art/characters/Back animations/spr_player_back_idle.png" id="5_fcs02"]
+[ext_resource type="Texture2D" uid="uid://e7gft1fn3tu" path="res://assets/art/characters/Back animations/spr_player_back_hit.png" id="5_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://6b8hqthnbi0w" path="res://assets/art/characters/Front animations/spr_player_front_walk.png" id="6_myrg7"]
 [ext_resource type="Texture2D" uid="uid://b57h4dsv0go0n" path="res://assets/art/characters/Side animations/spr_player_left_walk.png" id="7_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://0s07qhcgxqr8" path="res://assets/art/characters/Side animations/spr_player_right_walk.png" id="8_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://buabmqy3w536d" path="res://assets/art/characters/Back animations/spr_player_back_walk.png" id="9_lgqa7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
+atlas = ExtResource("2_gx1jg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
+atlas = ExtResource("2_gx1jg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
+atlas = ExtResource("2_gx1jg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
+atlas = ExtResource("2_gx1jg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgqa7"]
+atlas = ExtResource("3_myrg7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31ki0"]
+atlas = ExtResource("3_myrg7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf5gj"]
+atlas = ExtResource("3_myrg7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avmva"]
+atlas = ExtResource("3_myrg7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ioy2"]
+atlas = ExtResource("4_kvlxm")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlhku"]
+atlas = ExtResource("4_kvlxm")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws0t6"]
+atlas = ExtResource("4_kvlxm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6ap2"]
+atlas = ExtResource("4_kvlxm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88c1f"]
+atlas = ExtResource("5_uf5tr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdu4s"]
+atlas = ExtResource("5_uf5tr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wr6q"]
+atlas = ExtResource("5_uf5tr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0anf"]
+atlas = ExtResource("5_uf5tr")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ydkj"]
 atlas = ExtResource("2_fm80t")
@@ -305,6 +373,74 @@ region = Rect2(320, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ugbui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcs02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myrg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvlxm")
+}],
+"loop": true,
+"name": &"hit_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgqa7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31ki0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf5gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avmva")
+}],
+"loop": true,
+"name": &"hit_left",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ioy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlhku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws0t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6ap2")
+}],
+"loop": true,
+"name": &"hit_right",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88c1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdu4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wr6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0anf")
+}],
+"loop": true,
+"name": &"hit_up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8ydkj")
 }, {
 "duration": 1.0,
@@ -573,8 +709,8 @@ script = ExtResource("1_abrql")
 position = Vector2(16, 16.572)
 scale = Vector2(0.75, 0.6785)
 sprite_frames = SubResource("SpriteFrames_7lmhl")
-animation = &"walk_up"
-frame_progress = 0.40923458
+animation = &"hit_down"
+frame_progress = 0.5515744
 
 [node name="FlickerTimer" type="Timer" parent="AnimatedSprite2D"]
 one_shot = true
